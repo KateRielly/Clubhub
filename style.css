@@ -33,7 +33,7 @@ body{
 
 }
 
-.nav .button{
+.button{
     cursor: pointer;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -44,6 +44,11 @@ body{
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.3vw;
     color: white;
+}
+
+.button:hover {
+    background-color: white;
+    color:black;
 }
 
 @media screen and (min-width: 1460px) {
@@ -73,30 +78,182 @@ body{
     margin-top: 3vw;
     background-color: rgb(230, 226, 226);
 }
-.rankingsBox .rankingTitle{
+.rankingTitle{
     padding: 20px;
     text-align: center;
     background-color: rgb(219, 195, 199);
 }
 
-.rankingsBox .topTenList{
+.topTenList{
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 17px;
 }
 
-.rankingsBox .topTenList .first{
+.first{
     display: flex;
     font-size: 20px;
 
 }
-.rankingsBox .topTenList .first .trophy{
+.second{
+    display: flex;
+    font-size: 20px;
+
+}
+.trophy{
     max-height: 20px;
     margin: 2px;
 }
+.third{
+    display: flex;
+    font-size: 20px;
 
-.rankingsBox .topTenList .twoToTen .ranking{
+}
+
+.ranking{
     margin: 20px;
     text-align: center;
+}
+
+.ranking:hover{
+    text-decoration: underline;
+    color:  white;
+}
+
+.first:hover{
+    text-decoration: underline;
+    font-weight: bold;
+    color:  rgb(141, 13, 24);
+}
+.second:hover{
+    text-decoration: underline;
+    font-weight: bold;
+    color:  rgb(141, 13, 24);
+}
+.third:hover{
+    text-decoration: underline;
+    font-weight: bold;
+    color:  rgb(141, 13, 24);
+}
+
+.calendar{
+    display: flex;
+    margin: 2vw;
+    flex-direction: column;
+    background-color: white;
+}
+
+.calendarTitle{
+    background-color: rgb(141, 13, 24);
+    font-size: 15px;
+    margin: 2vw;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    text-align: center;
+    background-image: url("whiteboard.png");
+    background-size: cover;
+}
+
+.infoBox{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+.subtitle{
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.displayOptions{
+    margin: 10px;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    background-color:white;
+}
+
+.options{
+    height: 36vw;
+    margin: 2vw;
+    padding: 1vw;
+    background-color:lightgray;
+}
+
+.description{
+    height: 8vw;
+    margin: 2vw;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 2vw;
+    color: white;
+    padding: 1vw;
+    background-color:rgba(141, 13, 24, 0.777);
+}
+
+.infographic{
+    margin: 10px;
+    width: 66vw;
+    height: 49vw;
+    background-color:rgba(184, 118, 115, 0.496);
+    background-image: url("calendarStandIn.webp");
+    background-size: cover;
+    font-size: 13vw;
+    color: tomato;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+}
+
+/* Customize the label (the container) */
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    font-size: 2vw;
+    justify-content: center;
+    padding: 1vw;
+    
+  }
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
+    background-color: lightgray;
+    margin: 0;
+
+}
+.footnote{
+    padding: 2vw;
+}
+
+.logos{
+    background-image: url("smallAlogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+}
+.logo{
+    width: 6vw;
+    height: auto;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    background-color: lightgrey;
+}
+
+.logo:hover{
+    opacity:0;
+}
+
+.footnote:hover{
+    color: white;
+    background-color: rgb(141, 13, 24);
+    text-decoration-line: overline;
+    text-decoration-thickness: from-font;
+    font-style: oblique;
 }
