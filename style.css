@@ -1,7 +1,10 @@
+/* this is suposed to aid UI, I dont know how effective
+ it is, but its not messing with the code s I left it */
 html {
     scroll-behavior: smooth;
 }
 
+/* sets the base guidelines for the whoel page */
 body{
     margin: 0;
     padding: 0;
@@ -9,12 +12,7 @@ body{
     font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-/* img.Backgroud{
-    background-image: url("Backgroud.png");
-    margin-top: 0;
-    max-width: 100vw;
-} */
-
+/* creates the header with a background image of th upper school */
 .header{
     padding-top: 1vw;
     padding-bottom: 1vw;
@@ -26,6 +24,7 @@ body{
     font-size: 3vw;
 }
 
+/* creats setting for the nav bar, where nav buttons reside */
 .nav{
     display: flex;
     background-color: rgb(141, 13, 24);
@@ -33,6 +32,7 @@ body{
 
 }
 
+/* customizes the indavidual buttons in the nav bar */
 .button{
     cursor: pointer;
     padding-top: 4px;
@@ -46,17 +46,20 @@ body{
     color: white;
 }
 
+/* hover animation */
 .button:hover {
     background-color: white;
     color:black;
 }
+/* --- end of navigation bar --- */
 
+/* attempt at making it mobile frendliy @ media screen make a 
+sort of conditional statement for how big the mindow is open */
 @media screen and (min-width: 1460px) {
     .nav .button{
         font-size: 19px;
     }
 }
-
 @media screen and (max-width: 750px) {
     .nav .button{
         font-size: 10px;
@@ -65,25 +68,22 @@ body{
     }
 }
 
-@media screen and (max-width: 500px) {
-    .nav .button{
-        font-size: 10px;
-        padding-left: 3px;
-        padding-right: 3px;
-    }
-}
-
+/* creates the encapsilationg flex
+ box for the ranking+ description */
 .rankingsBox{
     margin: 5vw;
     margin-top: 3vw;
     background-color: rgb(230, 226, 226);
 }
+/* description of what the rankings mean */
 .rankingTitle{
     padding: 20px;
     text-align: center;
     background-color: rgb(219, 195, 199);
 }
 
+/* makes the flex box where
+ the rankings will be listed */
 .topTenList{
     display: flex;
     flex-direction: column;
@@ -91,52 +91,41 @@ body{
     font-size: 17px;
 }
 
-.first{
+/* sets the style for ranking 1-3 */
+.topThree{
     display: flex;
     font-size: 20px;
 
 }
-.second{
-    display: flex;
-    font-size: 20px;
 
-}
+/* adds restrictions to the graphics 1-3 rank*/
 .trophy{
     max-height: 20px;
     margin: 2px;
 }
-.third{
-    display: flex;
-    font-size: 20px;
 
-}
-
+/* sets the style for ranking 4-10 */
 .ranking{
     margin: 20px;
     text-align: center;
 }
 
+/* sets the hover animation for rankings 4-10 */
 .ranking:hover{
     text-decoration: underline;
     color:  white;
 }
+/* sets the hover animation for rankings 1-3 */
+.topThree:hover{
+    text-decoration: underline;
+    font-weight: bold;
+    color:  rgb(141, 13, 24);
+}
+/* --- end of rankingsBox --- */
 
-.first:hover{
-    text-decoration: underline;
-    font-weight: bold;
-    color:  rgb(141, 13, 24);
-}
-.second:hover{
-    text-decoration: underline;
-    font-weight: bold;
-    color:  rgb(141, 13, 24);
-}
-.third:hover{
-    text-decoration: underline;
-    font-weight: bold;
-    color:  rgb(141, 13, 24);
-}
 
+/* this is the overaching flex box for the following ellements
+--- END CALENDAR will mark the end of this! */
 .calendar{
     display: flex;
     margin: 2vw;
@@ -144,32 +133,40 @@ body{
     background-color: white;
 }
 
+/* this is the title box for the calendar */
 .calendarTitle{
     background-color: rgb(141, 13, 24);
-    font-size: 15px;
+    font-size: 20px;
     margin: 2vw;
     margin-left: 4vw;
     margin-right: 4vw;
     text-align: center;
     background-image: url("whiteboard.png");
     background-size: cover;
+    color: white;
+}
+.subtitle{
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .infoBox{
     margin-top: 10px;
     display: flex;
-    flex-direction: row;
     background-color: white;
 }
-.subtitle{
-    font-size: 10px;
-    margin-bottom: 10px;
-}
 
-.displayOptions{
+/* -- creates a colum that can be 
+resid=zed to fit nicly beside the calendar-- */
+.filters{
+    /* margins add empty space, paddind ads space
+     from the outer edge of a element to the 
+     start of x element -- */
     margin: 10px;
     width: 25vw;
     display: flex;
+    /* changers the defalt direction of 
+    the flex box so elements are stacked*/
     flex-direction: column;
     background-color:white;
 }
@@ -180,7 +177,7 @@ body{
     padding: 1vw;
     background-color:lightgray;
 }
-
+/* --- basic information box -- */
 .description{
     height: 8vw;
     margin: 2vw;
@@ -194,6 +191,8 @@ body{
     background-color:rgba(141, 13, 24, 0.777);
 }
 
+/*-- this ir really just a place holder for when
+ we figure our haw to input the calendar --*/
 .infographic{
     margin: 10px;
     width: 66vw;
@@ -207,20 +206,22 @@ body{
     text-align: center;
 }
 
-/* Customize the label (the container) */
+/* Customize the label (the container) - 
+how the various check boxes are displayed */
 .container {
     display: flex;
+    /* displays check box infront of option*/
     flex-direction: row-reverse;
     cursor: pointer;
     font-size: 2vw;
     justify-content: center;
-    padding: 1vw;
     
   }
+/* --- END CALENDAR --- */
 
+/* creates the footer at the bottom of page */
 .footer{
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     font-size: 2vw;
@@ -230,24 +231,7 @@ body{
 }
 .footnote{
     padding: 2vw;
-}
-
-.logos{
-    background-image: url("smallAlogo.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:contain;
-}
-.logo{
-    width: 6vw;
-    height: auto;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    background-color: lightgrey;
-}
-
-.logo:hover{
-    opacity:0;
+    cursor: pointer;
 }
 
 .footnote:hover{
@@ -257,3 +241,35 @@ body{
     text-decoration-thickness: from-font;
     font-style: oblique;
 }
+
+/* ---creates a flex box, where the regular stab
+logo reside within. since the logo is typical a transparent bg 
+i had to se the backround to match the foot note for logo so
+the background image in logos would not show
+--- */
+.logos{
+    /* all of these create a singular 
+    (not repeated) saints athletic logo reside 
+    underneath the regular saints logo */
+    background-image: url("smallAlogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+    margin: 0;
+}
+.logo{
+    width: 6vw;
+    height: auto;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+/* upon hover, it makes the image/logo transparent 
+revealing background image in logos */
+.logo:hover{
+    opacity:0;
+}
+/* -------end of cool logo efect------- */
+/* end of footer */
