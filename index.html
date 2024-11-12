@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fixed the type attribute in the link tag -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
     <title>clubba hubba</title>
 </head>
 <body>
@@ -65,7 +66,6 @@
         <!-- this is then slipt into two boxes, the title and another box -->
         <div class="calendarTitle">
             <h1>Calendar</h1>
-            <h2 class="subtitle">November 12</h2>
         </div>
         <!-- this is the other box which contains the rest of the calendar elements -->
         <div class="infoBox">
@@ -101,7 +101,20 @@
             <!-- this will be where the calendar is displayed,
               still within the info box -->
             <div class="infographic">
-                calendar goes here!
+                <div class="title"> 
+                    <div class="arrow left" id="back"><div></div></div>
+                    <div class="monthYear" id="monthYear"></div>
+                    <div class="arrow right" id="forward"><div></div></div>
+                </div>
+                <div class="days">
+                    <div class="day">Sun</div>
+                    <div class="day">Mon</div>
+                    <div class="day">Tue</div>
+                    <div class="day">Wed</div>
+                    <div class="day">Thu</div>
+                    <div class="day">Fri</div>
+                    <div class="day">Sat</div>
+                </div>
             </div>
         </div>
         <!-- end of info box -->
