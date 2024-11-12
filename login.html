@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    
+  <!-- type must be "module": https://www.w3schools.com/js/js_modules.asp#:~:text=JavaScript%20modules%20allow%20you%20to,in%20the%20tag.-->  
+  <script type="module" src="script.js"></script>
+  <script type="module">
+    import {login} from './script.js';
+    window.login = login;
+  </script>
+
+  <br><br/>
+  
+  <header>St. Anne's-Belfield Club Hub</header>
+
+<!-- label and then text  input, both with ids -->
+  <br><br/>
+
+<label>Username:</label><input type="text" id="Username">
+  <br><br/>
+  <label>Password:</label><input type="password" id="Password">
+  <br><br/>
+  <button onclick="login(document.getElementById('Username').value, document.getElementById('Password').value );">Log In</button>
+</body>
+
+</html>
