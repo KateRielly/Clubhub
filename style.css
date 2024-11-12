@@ -137,17 +137,12 @@ sort of conditional statement for how big the mindow is open */
 .calendarTitle{
     background-color: rgb(141, 13, 24);
     font-size: 20px;
-    margin: 2vw;
     margin-left: 4vw;
     margin-right: 4vw;
     text-align: center;
     background-image: url("whiteboard.png");
     background-size: cover;
     color: white;
-}
-.subtitle{
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .infoBox{
@@ -162,7 +157,7 @@ resid=zed to fit nicly beside the calendar-- */
     /* margins add empty space, paddind ads space
      from the outer edge of a element to the 
      start of x element -- */
-    margin: 10px;
+    margin-left: 10px;
     width: 25vw;
     display: flex;
     /* changers the defalt direction of 
@@ -180,7 +175,7 @@ resid=zed to fit nicly beside the calendar-- */
 /* --- basic information box -- */
 .description{
     height: 8vw;
-    margin: 2vw;
+    margin: 10px;
     margin-bottom: 0;
     display: flex;
     justify-content: center;
@@ -197,12 +192,59 @@ resid=zed to fit nicly beside the calendar-- */
     margin: 10px;
     width: 66vw;
     height: 49vw;
-    background-color:rgba(184, 118, 115, 0.496);
-    background-image: url("calendarStandIn.webp");
+    background-color:rgba(223, 220, 220, 0.496);
     background-size: cover;
-    font-size: 13vw;
-    color: tomato;
+    font-size: 10px;
+    color:black;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    border-radius: 5%;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    padding: 2vw;
+}
+.arrow{
+    position: relative;
+    background-color:rgb(141, 13, 24);
+    margin: 40px;
+    padding: 4px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+.arrow:hover{
+    box-shadow: 0px 0px 10px 1px rgb(146, 146, 146);
+    background-color: black;
+    cursor: pointer;
+}
+
+.arrow div{
+    position: absolute;
+    height: 5px;
+    width: 5px;
+    border-top: 3px solid white;
+    border-left: 3px solid white;
+    transform: rotate(45deg);
+    left: 10px;
+    top: 10px;
+
+}
+.left{
+    transform: rotate(270deg);
+}
+.right{
+    transform: rotate(90deg);
+}
+
+.days{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+}
+
+.day{
     text-align: center;
 }
 
