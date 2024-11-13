@@ -32,19 +32,19 @@
             <div class = "topThree">
                 <!-- add graphic to either side of the top three
                  different graphic for each ranking -->
-                <img src="trophy.png" alt="trophy" class="trophy">
+                <img src="images/trophy.png" alt="trophy" class="trophy">
                 First
-                <img src="trophy.png" alt="trophy" class="trophy">
+                <img src="images/trophy.png" alt="trophy" class="trophy">
             </div>
             <div class = "topThree">
-                <img src="Silver.png" alt="trophy" class="trophy">
+                <img src="images/Silver.png" alt="trophy" class="trophy">
                 Second
-                <img src="Silver.png" alt="trophy" class="trophy">
+                <img src="images/Silver.png" alt="trophy" class="trophy">
             </div>
             <div class = "topThree">
-                <img src="Bronze.png" alt="trophy" class="trophy">
+                <img src="images/Bronze.png" alt="trophy" class="trophy">
                 Third
-                <img src="Bronze.png" alt="trophy" class="trophy">
+                <img src="images/Bronze.png" alt="trophy" class="trophy">
             </div>
             <!-- creates box for 4-10 spots -->
             <div class = "fourToTen">
@@ -100,22 +100,24 @@
             </div>
             <!-- this will be where the calendar is displayed,
               still within the info box -->
-            <div class="infographic">
-                <div class="title"> 
-                    <div class="arrow left" id="back"><div></div></div>
-                    <div class="monthYear" id="monthYear"></div>
-                    <div class="arrow right" id="forward"><div></div></div>
+                <div class="calendar">
+                    <div class="Cheader">
+                        <div id="prev" class="arrow left"><i></i></div>
+                        <div id="month-year"></div>
+                        <div id="next" class="arrow right"><i></i></div>
+                    </div>
+                    <div class="weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="days" id="days"></div>
                 </div>
-                <div class="days">
-                    <div class="day">Sun</div>
-                    <div class="day">Mon</div>
-                    <div class="day">Tue</div>
-                    <div class="day">Wed</div>
-                    <div class="day">Thu</div>
-                    <div class="day">Fri</div>
-                    <div class="day">Sat</div>
-                </div>
-            </div>
+                <script src="./scriptC.js"></script>
         </div>
         <!-- end of info box -->
     </div>
@@ -126,7 +128,7 @@
         <!-- by wraping the logo in another box you can
           make the image change on hover in css -->
         <div class="logos">
-            <img class="logo" src= "stab_logo.webp" alt="logo">
+            <img class="logo" src= "images/stab_logo.webp" alt="logo">
         </div>
         <p class="footnote">Home</p>
         <p class="footnote">Club Directory</p>
