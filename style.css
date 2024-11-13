@@ -1,6 +1,6 @@
 /* this is suposed to aid UI, I dont know how effective
  it is, but its not messing with the code s I left it */
-html {
+ html {
     scroll-behavior: smooth;
 }
 
@@ -18,7 +18,7 @@ body{
     padding-bottom: 1vw;
     color: white;
     background-color: rgb(0, 0, 0);
-    background-image: url("Backgroud.png");
+    background-image: url("images/Backgroud.png");
     background-size: cover;
     text-align: center;
     font-size: 3vw;
@@ -140,7 +140,7 @@ sort of conditional statement for how big the mindow is open */
     margin-left: 4vw;
     margin-right: 4vw;
     text-align: center;
-    background-image: url("whiteboard.png");
+    background-image: url("images/whiteboard.png");
     background-size: cover;
     color: white;
 }
@@ -188,40 +188,41 @@ resid=zed to fit nicly beside the calendar-- */
 
 /*-- this ir really just a place holder for when
  we figure our haw to input the calendar --*/
-.infographic{
-    margin: 10px;
-    width: 66vw;
-    height: 49vw;
-    background-color:rgba(223, 220, 220, 0.496);
-    background-size: cover;
-    font-size: 10px;
-    color:black;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    text-align: center;
-    border-radius: 5%;
+
+ .calendar {
+    background-color:rgb(237, 237, 237);
+    overflow: hidden;
+    width: 90%;
+
+    color: rgb(141, 13, 24);
+    padding: 20px;
 }
-.title{
+.Cheader {
     display: flex;
-    justify-content: center;
-    align-items:center;
-    padding: 2vw;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-decoration: underline;
 }
+.btn {
+    cursor: pointer;
+}
+
 .arrow{
     position: relative;
-    background-color:rgb(141, 13, 24);
-    margin: 40px;
+    background-color:rgb(107, 107, 107);
     padding: 4px;
     height: 20px;
     width: 20px;
     border-radius: 50%;
 }
 .arrow:hover{
-    box-shadow: 0px 0px 10px 1px rgb(146, 146, 146);
-    background-color: black;
+    box-shadow: 0px 0px 5px 1px rgb(146, 146, 146);
+    background-color: rgb(141, 13, 24);
     cursor: pointer;
 }
 
-.arrow div{
+.arrow i{
     position: absolute;
     height: 5px;
     width: 5px;
@@ -239,26 +240,41 @@ resid=zed to fit nicly beside the calendar-- */
     transform: rotate(90deg);
 }
 
-.days{
-    display: grid;
-    grid-template-columns: repeat(7,1fr);
+#month-year {
+    font-weight: bold;
+    font-size: 20px;
 }
-
-.day{
-    text-align: center;
-}
-
-/* Customize the label (the container) - 
-how the various check boxes are displayed */
-.container {
+.weekdays, .days {
     display: flex;
-    /* displays check box infront of option*/
-    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+.days {
+    height: 240px;
+}
+.weekdays div, .days div {
+    width: 14.28%;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+.days div {
+    height: 20%;
     cursor: pointer;
-    font-size: 2vw;
-    justify-content: center;
-    
-  }
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    border-color: black;
+}
+.days div:hover {
+    background-color: white;
+    color: black;
+}
+.days .today {
+    background-color: rgb(141, 13, 24);
+    color: white;
+}
+.days .fade {
+    color: #afadad;
+}
 /* --- END CALENDAR --- */
 
 /* creates the footer at the bottom of page */
@@ -293,7 +309,7 @@ the background image in logos would not show
     /* all of these create a singular 
     (not repeated) saints athletic logo reside 
     underneath the regular saints logo */
-    background-image: url("smallAlogo.png");
+    background-image: url("images/smallAlogo.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size:contain;
