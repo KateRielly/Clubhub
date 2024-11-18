@@ -1,146 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fixed the type attribute in the link tag -->
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js"></script>
-    <title>clubba hubba</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <!-- creates the header box and the title, inside the box -->
-    <header class="header" id="header">
-        <h1> Saint's Club Hub</h1>
-    </header>
+  
+  <!-- type must be "module": https://www.w3schools.com/js/js_modules.asp#:~:text=JavaScript%20modules%20allow%20you%20to,in%20the%20tag.-->  
+  <script type="module" src="script.js"></script>
+  <script type="module">
+    import {login} from './script.js';
+    window.login = login;
+  </script>
 
-    <!-- Creates a bar below header box with nav buttons -->
-    <div class="nav">
-        <button class="button">Home</button>
-        <button class="button">Calendar</button>
-        <button class="button">Club Directory</button>
-        <button class="button">Profile</button>
-    </div>
+  <br><br/>
+  
+  <header>St. Anne's-Belfield Club Hub</header>
+  <br><br/>
+  <header>Club Registration</header>
 
-    <!-- creates a box to hold the ranking stuff -->
-    <div class="rankingsBox">
-        <h2 class="rankingTitle"> CLUB ENGAGEMENT RANKINGS</h2>
-        <div class="topTenList">
-            <div class="topThree">
-                <img src="images/trophy.png" alt="trophy" class="trophy">
-                First
-                <img src="images/trophy.png" alt="trophy" class="trophy">
-            </div>
-            <div class="topThree">
-                <img src="images/Silver.png" alt="trophy" class="trophy">
-                Second
-                <img src="images/Silver.png" alt="trophy" class="trophy">
-            </div>
-            <div class="topThree">
-                <img src="images/Bronze.png" alt="trophy" class="trophy">
-                Third
-                <img src="images/Bronze.png" alt="trophy" class="trophy">
-            </div>
-            <div class="fourToTen">
-                <p class="ranking">Fourth</p>
-                <p class="ranking">Fifth</p>
-                <p class="ranking">Sixth</p>
-                <p class="ranking">Seventh</p>
-                <p class="ranking">Eighth</p>
-                <p class="ranking">Ninth</p>
-                <p class="ranking">Tenth</p>
-            </div>
-        </div>
-    </div>
+<!-- label and then text input, both with ids -->
+  <br><br/>
+  <br><br/>
 
-    <!-- Calendar Section -->
-    <div class="calendarTitle">
-        <h1>Calendar</h1>
-    </div>
+<!-- The "placeholder" is the grey script in the text boxes before you type anything in-->
+<label>Username:</label><input type="text" id="username" placeholder = "Use Club Name">
+ 
+  <br><br/>
 
-    <!-- Info Box for Calendar Filters -->
-<div class="infoBox">
-    <!-- Filter Options Section -->
-    <div class="filters">
-        <div class="description">
-            <p>What are you interested in?</p> <!-- Prompt for filters -->
-        </div>
-        <div class="options">
-            <!-- Filter checkboxes for different categories -->
-            <label class="container">STEM
-                <input type="checkbox"> 
-                <span class="checkmark"></span> <!-- Custom checkbox styling -->
-            </label>
-            <label class="container">ART
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Writing
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Service
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
+  <label>Password:</label><input type="text" id="password" placeholder = "Type Here">
+ 
+  <br><br/>
 
-    <!-- Calendar Display -->
-    <div class="calendar">
-        <!-- Calendar Header -->
-        <div class="Cheader">
-            <div id="prev" class="arrow left"><i></i></div> <!-- Previous month arrow -->
-            <div id="month-year"></div> <!-- Current month and year display -->
-            <div id="next" class="arrow right"><i></i></div> <!-- Next month arrow -->
-        </div>
+  <!-- Links to the moreInfo page and calls onclick function login(); uses username and password as parameters -->
+  <a href="moreInfo.html"><button onclick="login(document.getElementById('username').value, document.getElementById('password').value); ">Continue</button></a>
+  
+  <br><br/>
+  <br><br/>
 
-        <!-- Days of the Week -->
-        <div class="weekdays">
-            <div>Sun</div> <!-- Sunday -->
-            <div>Mon</div> <!-- Monday -->
-            <div>Tue</div> <!-- Tuesday -->
-            <div>Wed</div> <!-- Wednesday -->
-            <div>Thu</div> <!-- Thursday -->
-            <div>Fri</div> <!-- Friday -->
-            <div>Sat</div> <!-- Saturday -->
-        </div>
-
-        <!-- Calendar Days -->
-        <div class="days" id="days"></div> <!-- Populated dynamically with days -->
-
-        <!-- Event Modal for Adding Events -->
-        <div id="newEventModal">
-            <h2>New Event</h2> <!-- Modal title -->
-            <input id="eventTitleInput" placeholder="Event Title" /> <!-- Input for event title -->
-            <button id="saveButton">Save</button> <!-- Save event -->
-            <button id="cancelButton">Cancel</button> <!-- Close modal -->
-        </div>
-
-        <!-- Event Modal for Viewing/Deleting Events -->
-        <div id="deleteEventModal">
-            <h2>Event</h2> <!-- Modal title -->
-            <p id="eventText"></p> <!-- Displays event details -->
-            <button id="deleteButton">Delete</button> <!-- Delete event -->
-            <button id="closeButton">Close</button> <!-- Close modal -->
-        </div>
-
-        <!-- Modal Backdrop -->
-        <div id="modalBackDrop"></div> <!-- Dark overlay behind modals -->
-    </div>
-</div>
+  <a href="login.html"><p></p>Already have a club? Login Here</a>
 
 
-    <!-- Footer -->
-    <div class="footer">
-        <div class="logos">
-            <img class="logo" src="images/stab_logo.webp" alt="logo">
-        </div>
-        <p class="footnote">Club Directory</p>
-        <p class="footnote">Profile</p>
-    </div>
 
-    <!-- Your scriptC.js -->
-    <script src="./scriptC.js"></script>
 </body>
+
 </html>
