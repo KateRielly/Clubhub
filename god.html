@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>God</title>
-    <!-- can change if we would like, just create a new css page and change that here. -->
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <script type="module" src="script.js"></script>
+    <!-- Fixed the type attribute in the link tag -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+    <title>clubba hubba</title>
     <script type="module">
          import {checkLogin} from './script.js';
            window.checkLogin = checkLogin;
@@ -14,11 +14,128 @@
     </script> 
 </head>
 <body>
-<body>
-<body>
-    
+    <!-- creates the header box and the title, inside the box -->
+    <header class="header" id="header">
+        <h1> Admin Page</h1>
+    </header>
 
-    <header>Welcome Mr. Hart, Here You Can Manage and Edit All Clubs </header>
+    <!-- Creates a bar bellow hearder box with nav buttons -->
+    <div class="nav">
+        <button onclick="location.replace('index.html');">Home</button>
+        <button class="button">Calendar</button>
+        <button class="button">Club Directory</button>
+        <button onclick="location.replace('notifs.html');">Notifications </button>
+    </div>
+
+    <!-- creates a box to hold the ranking stuff -->
+    <div class = "rankingsBox">
+        <h2 class="rankingTitle"> Edit Clubs:</h2>
+        <!-- creates a second box, withing rankings box
+         and under the header to hole rankings -->
+        <div class = "topTenList">
+            <!-- sets the top three ranking a tad seperate from the rest -->
+            <div class = "topThree">
+                <!-- add graphic to either side of the top three
+                 different graphic for each ranking -->
+                <img src="trophy.png" alt="trophy" class="trophy">
+                First
+                <img src="trophy.png" alt="trophy" class="trophy">
+            </div>
+            <div class = "topThree">
+                <img src="Silver.png" alt="trophy" class="trophy">
+                Second
+                <img src="Silver.png" alt="trophy" class="trophy">
+            </div>
+            <div class = "topThree">
+                <img src="Bronze.png" alt="trophy" class="trophy">
+                Third
+                <img src="Bronze.png" alt="trophy" class="trophy">
+            </div>
+            <!-- creates box for 4-10 spots -->
+            <div class = "fourToTen">
+                <p class="ranking">Fourth</p>
+                <p class="ranking">Fifth</p>
+                <p class="ranking">Sixth</p>
+                <p class="ranking">Seventh</p>
+                <p class="ranking">Eigth</p>
+                <p class="ranking">Ninth</p>
+                <p class="ranking">Tenth</p>
+            </div>
+        </div>
+    </div>
+    <!-- ---end of rankings box--- -->
+
+    <!-- creates an overaching box that contains
+      all calendar/ calendar info elements -->
+    <div class="calendar">
+        <!-- this is then slipt into two boxes, the title and another box -->
+        <div class="calendarTitle">
+            <h1>Calendar</h1>
+        </div>
+        <!-- this is the other box which contains the rest of the calendar elements -->
+        <div class="infoBox">
+            <!-- creates a box with possible ways to filter
+              what is displayed on the calendar -->
+            <div class="filters">
+                <!-- adds a box holding the calendar's description -->
+                <div class="description">
+                    <p>what are you interested in?</p>
+                </div>
+                <!-- displays a box with checkbox options -->
+                <div class="options">
+                    <label class="container">STEM
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                      </label>
+                      
+                      <label class="container">ART
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                      <label class="container">Writing
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                      
+                      <label class="container">Service
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                      </label>
+                </div>
+            </div>
+            <!-- this will be where the calendar is displayed,
+              still within the info box -->
+            <div class="infographic">
+                <div class="title"> 
+                    <div class="arrow left" id="back"><div></div></div>
+                    <div class="monthYear" id="monthYear"></div>
+                    <div class="arrow right" id="forward"><div></div></div>
+                </div>
+                <div class="days">
+                    <div class="day">Sun</div>
+                    <div class="day">Mon</div>
+                    <div class="day">Tue</div>
+                    <div class="day">Wed</div>
+                    <div class="day">Thu</div>
+                    <div class="day">Fri</div>
+                    <div class="day">Sat</div>
+                </div>
+            </div>
+        </div>
+        <!-- end of info box -->
+    </div>
+    <!-- end of calendar group -->
+
+    <!-- creates a footer at the bottom of the page -->
+    <div class="footer">
+        <!-- by wraping the logo in another box you can
+          make the image change on hover in css -->
+        <div class="logos">
+            <img class="logo" src= "stab_logo.webp" alt="logo">
+        </div>
+        <p class="footnote">Home</p>
+        <p class="footnote">Club Directory</p>
+        <p class="footnote">Profile</p>
+    </div>
 
 </body>
-</html>
