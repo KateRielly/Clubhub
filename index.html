@@ -14,7 +14,7 @@
         <h1> Saint's Club Hub</h1>
     </header>
 
-    <!-- Creates a bar bellow hearder box with nav buttons -->
+    <!-- Creates a bar below header box with nav buttons -->
     <div class="nav">
         <button class="button">Home</button>
         <button class="button">Calendar</button>
@@ -23,116 +23,124 @@
     </div>
 
     <!-- creates a box to hold the ranking stuff -->
-    <div class = "rankingsBox">
+    <div class="rankingsBox">
         <h2 class="rankingTitle"> CLUB ENGAGEMENT RANKINGS</h2>
-        <!-- creates a second box, withing rankings box
-         and under the header to hole rankings -->
-        <div class = "topTenList">
-            <!-- sets the top three ranking a tad seperate from the rest -->
-            <div class = "topThree">
-                <!-- add graphic to either side of the top three
-                 different graphic for each ranking -->
+        <div class="topTenList">
+            <div class="topThree">
                 <img src="images/trophy.png" alt="trophy" class="trophy">
                 First
                 <img src="images/trophy.png" alt="trophy" class="trophy">
             </div>
-            <div class = "topThree">
+            <div class="topThree">
                 <img src="images/Silver.png" alt="trophy" class="trophy">
                 Second
                 <img src="images/Silver.png" alt="trophy" class="trophy">
             </div>
-            <div class = "topThree">
+            <div class="topThree">
                 <img src="images/Bronze.png" alt="trophy" class="trophy">
                 Third
                 <img src="images/Bronze.png" alt="trophy" class="trophy">
             </div>
-            <!-- creates box for 4-10 spots -->
-            <div class = "fourToTen">
+            <div class="fourToTen">
                 <p class="ranking">Fourth</p>
                 <p class="ranking">Fifth</p>
                 <p class="ranking">Sixth</p>
                 <p class="ranking">Seventh</p>
-                <p class="ranking">Eigth</p>
+                <p class="ranking">Eighth</p>
                 <p class="ranking">Ninth</p>
                 <p class="ranking">Tenth</p>
             </div>
         </div>
     </div>
-    <!-- ---end of rankings box--- -->
 
-    <!-- creates an overaching box that contains
-      all calendar/ calendar info elements -->
-    <div class="calendar">
-        <!-- this is then slipt into two boxes, the title and another box -->
-        <div class="calendarTitle">
-            <h1>Calendar</h1>
-        </div>
-        <!-- this is the other box which contains the rest of the calendar elements -->
-        <div class="infoBox">
-            <!-- creates a box with possible ways to filter
-              what is displayed on the calendar -->
-            <div class="filters">
-                <!-- adds a box holding the calendar's description -->
-                <div class="description">
-                    <p>what are you interested in?</p>
-                </div>
-                <!-- displays a box with checkbox options -->
-                <div class="options">
-                    <label class="container">STEM
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                      </label>
-                      
-                      <label class="container">ART
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                      </label>
-                      <label class="container">Writing
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                      </label>
-                      
-                      <label class="container">Service
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                      </label>
-                </div>
-            </div>
-            <!-- this will be where the calendar is displayed,
-              still within the info box -->
-                <div class="calendar">
-                    <div class="Cheader">
-                        <div id="prev" class="arrow left"><i></i></div>
-                        <div id="month-year"></div>
-                        <div id="next" class="arrow right"><i></i></div>
-                    </div>
-                    <div class="weekdays">
-                        <div>Sun</div>
-                        <div>Mon</div>
-                        <div>Tue</div>
-                        <div>Wed</div>
-                        <div>Thu</div>
-                        <div>Fri</div>
-                        <div>Sat</div>
-                    </div>
-                    <div class="days" id="days"></div>
-                </div>
-                <script src="./scriptC.js"></script>
-        </div>
-        <!-- end of info box -->
+    <!-- Calendar Section -->
+    <div class="calendarTitle">
+        <h1>Calendar</h1>
     </div>
-    <!-- end of calendar group -->
 
-    <!-- creates a footer at the bottom of the page -->
-    <div class="footer">
-        <!-- by wraping the logo in another box you can
-          make the image change on hover in css -->
-        <div class="logos">
-            <img class="logo" src= "images/stab_logo.webp" alt="logo">
+    <!-- Info Box for Calendar Filters -->
+<div class="infoBox">
+    <!-- Filter Options Section -->
+    <div class="filters">
+        <div class="description">
+            <p>What are you interested in?</p> <!-- Prompt for filters -->
         </div>
-        <p class="footnote">Home</p>
+        <div class="options">
+            <!-- Filter checkboxes for different categories -->
+            <label class="container">STEM
+                <input type="checkbox"> 
+                <span class="checkmark"></span> <!-- Custom checkbox styling -->
+            </label>
+            <label class="container">ART
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <label class="container">Writing
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <label class="container">Service
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Calendar Display -->
+    <div class="calendar">
+        <!-- Calendar Header -->
+        <div class="Cheader">
+            <div id="prev" class="arrow left"><i></i></div> <!-- Previous month arrow -->
+            <div id="month-year"></div> <!-- Current month and year display -->
+            <div id="next" class="arrow right"><i></i></div> <!-- Next month arrow -->
+        </div>
+
+        <!-- Days of the Week -->
+        <div class="weekdays">
+            <div>Sun</div> <!-- Sunday -->
+            <div>Mon</div> <!-- Monday -->
+            <div>Tue</div> <!-- Tuesday -->
+            <div>Wed</div> <!-- Wednesday -->
+            <div>Thu</div> <!-- Thursday -->
+            <div>Fri</div> <!-- Friday -->
+            <div>Sat</div> <!-- Saturday -->
+        </div>
+
+        <!-- Calendar Days -->
+        <div class="days" id="days"></div> <!-- Populated dynamically with days -->
+
+        <!-- Event Modal for Adding Events -->
+        <div id="newEventModal">
+            <h2>New Event</h2> <!-- Modal title -->
+            <input id="eventTitleInput" placeholder="Event Title" /> <!-- Input for event title -->
+            <button id="saveButton">Save</button> <!-- Save event -->
+            <button id="cancelButton">Cancel</button> <!-- Close modal -->
+        </div>
+
+        <!-- Event Modal for Viewing/Deleting Events -->
+        <div id="deleteEventModal">
+            <h2>Event</h2> <!-- Modal title -->
+            <p id="eventText"></p> <!-- Displays event details -->
+            <button id="deleteButton">Delete</button> <!-- Delete event -->
+            <button id="closeButton">Close</button> <!-- Close modal -->
+        </div>
+
+        <!-- Modal Backdrop -->
+        <div id="modalBackDrop"></div> <!-- Dark overlay behind modals -->
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="logos">
+            <img class="logo" src="images/stab_logo.webp" alt="logo">
+        </div>
         <p class="footnote">Club Directory</p>
         <p class="footnote">Profile</p>
     </div>
 
+    <!-- Your scriptC.js -->
+    <script src="./scriptC.js"></script>
 </body>
+</html>
