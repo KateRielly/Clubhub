@@ -1,18 +1,18 @@
-/* this is supposed to aid UI, I don't know how effective
- it is, but it's not messing with the code I left it */
+/* this is suposed to aid UI, I dont know how effective
+ it is, but its not messing with the code s I left it */
  html {
     scroll-behavior: smooth;
 }
 
-/* sets the base guidelines for the whole page */
+/* sets the base guidelines for the whoel page */
 body{
     margin: 0;
     padding: 0;
     background-color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
-/* creates the header with a background image of the upper school */
+/* creates the header with a background image of th upper school */
 .header{
     padding-top: 1vw;
     padding-bottom: 1vw;
@@ -24,7 +24,7 @@ body{
     font-size: 3vw;
 }
 
-/* creates settings for the nav bar, where nav buttons reside */
+/* creats setting for the nav bar, where nav buttons reside */
 .nav{
     display: flex;
     background-color: rgb(141, 13, 24);
@@ -32,7 +32,7 @@ body{
 
 }
 
-/* customizes the individual buttons in the nav bar */
+/* customizes the indavidual buttons in the nav bar */
 .button{
     cursor: pointer;
     padding-top: 4px;
@@ -47,13 +47,13 @@ body{
 }
 
 /* hover animation */
-.button: hover {
+.button:hover {
     background-color: white;
     color:black;
 }
 /* --- end of navigation bar --- */
 
-/* attempt at making it mobile friendly @ media screen make a 
+/* attempt at making it mobile frendliy @ media screen make a 
 sort of conditional statement for how big the mindow is open */
 @media screen and (min-width: 1460px) {
     .nav .button{
@@ -348,6 +348,13 @@ resid=zed to fit nicly beside the calendar-- */
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent */
 }
+/* has to do with brynne's stuff */
+.tagBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 /* creates the footer at the bottom of page */
 .footer{
@@ -375,6 +382,7 @@ resid=zed to fit nicly beside the calendar-- */
     text-decoration-thickness: from-font;
     font-style: oblique;
 }
+
 
 /* ---creates a flex box, where the regular stab
 logo reside within. since the logo is typical a transparent bg 
@@ -406,3 +414,4 @@ revealing background image in logos */
 }
 /* -------end of cool logo efect------- */
 /* end of footer */
+
