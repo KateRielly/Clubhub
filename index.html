@@ -23,7 +23,7 @@
  </script>
    <div class="nav">
        <button class="button">Home</button>
-       <button class="button">Calendar</button>
+       <a class="button" href="#calendar">Calendar</a>
        <button class="button">Club Directory</button>
        <button class="button" onClick = "location.replace('choose.html');">Log in</button>
    </div>
@@ -61,81 +61,84 @@
     </div>
 
     <!-- Calendar Section -->
-    <div class="calendarTitle">
-        <h1>Calendar</h1>
+    <section id="calendar">  
+        <div class="calendarTitle">
+            <h1>Calendar</h1>
+        </div>
+    
+        <!-- Info Box for Calendar Filters -->
+    <div class="infoBox">
+        <!-- Filter Options Section -->
+        <div class="filters">
+            <div class="description">
+                <p>What are you interested in?</p> <!-- Prompt for filters -->
+            </div>
+            <div class="options">
+                <!-- Filter checkboxes for different categories -->
+                <label class="container">STEM
+                    <input type="checkbox"> 
+                    <span class="checkmark"></span> <!-- Custom checkbox styling -->
+                </label>
+                <label class="container">ART
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Writing
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Service
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    
+        <!-- Calendar Display -->
+        <div class="calendar">
+            <!-- Calendar Header -->
+            <div class="Cheader">
+                <div id="prev" class="arrow left"><i></i></div> <!-- Previous month arrow -->
+                <div id="month-year"></div> <!-- Current month and year display -->
+                <div id="next" class="arrow right"><i></i></div> <!-- Next month arrow -->
+            </div>
+    
+            <!-- Days of the Week -->
+            <div class="weekdays">
+                <div>Sun</div> <!-- Sunday -->
+                <div>Mon</div> <!-- Monday -->
+                <div>Tue</div> <!-- Tuesday -->
+                <div>Wed</div> <!-- Wednesday -->
+                <div>Thu</div> <!-- Thursday -->
+                <div>Fri</div> <!-- Friday -->
+                <div>Sat</div> <!-- Saturday -->
+            </div>
+    
+            <!-- Calendar Days -->
+            <div class="days" id="days"></div> <!-- Populated dynamically with days -->
+    
+            <!-- Event Modal for Adding Events -->
+            <div id="newEventModal">
+                <h2>New Event</h2> <!-- Modal title -->
+                <input id="eventTitleInput" placeholder="Event Title" /> <!-- Input for event title -->
+                <button id="saveButton">Save</button> <!-- Save event -->
+                <button id="cancelButton">Cancel</button> <!-- Close modal -->
+            </div>
+    
+            <!-- Event Modal for Viewing/Deleting Events -->
+            <div id="deleteEventModal">
+                <h2>Event</h2> <!-- Modal title -->
+                <p id="eventText"></p> <!-- Displays event details -->
+                <button id="deleteButton">Delete</button> <!-- Delete event -->
+                <button id="closeButton">Close</button> <!-- Close modal -->
+            </div>
+    
+            <!-- Modal Backdrop -->
+            <div id="modalBackDrop"></div> <!-- Dark overlay behind modals -->
+        </div>
     </div>
+</section>
 
-    <!-- Info Box for Calendar Filters -->
-<div class="infoBox">
-    <!-- Filter Options Section -->
-    <div class="filters">
-        <div class="description">
-            <p>What are you interested in?</p> <!-- Prompt for filters -->
-        </div>
-        <div class="options">
-            <!-- Filter checkboxes for different categories -->
-            <label class="container">STEM
-                <input type="checkbox"> 
-                <span class="checkmark"></span> <!-- Custom checkbox styling -->
-            </label>
-            <label class="container">ART
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Writing
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Service
-                <input type="checkbox">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-
-    <!-- Calendar Display -->
-    <div class="calendar">
-        <!-- Calendar Header -->
-        <div class="Cheader">
-            <div id="prev" class="arrow left"><i></i></div> <!-- Previous month arrow -->
-            <div id="month-year"></div> <!-- Current month and year display -->
-            <div id="next" class="arrow right"><i></i></div> <!-- Next month arrow -->
-        </div>
-
-        <!-- Days of the Week -->
-        <div class="weekdays">
-            <div>Sun</div> <!-- Sunday -->
-            <div>Mon</div> <!-- Monday -->
-            <div>Tue</div> <!-- Tuesday -->
-            <div>Wed</div> <!-- Wednesday -->
-            <div>Thu</div> <!-- Thursday -->
-            <div>Fri</div> <!-- Friday -->
-            <div>Sat</div> <!-- Saturday -->
-        </div>
-
-        <!-- Calendar Days -->
-        <div class="days" id="days"></div> <!-- Populated dynamically with days -->
-
-        <!-- Event Modal for Adding Events -->
-        <div id="newEventModal">
-            <h2>New Event</h2> <!-- Modal title -->
-            <input id="eventTitleInput" placeholder="Event Title" /> <!-- Input for event title -->
-            <button id="saveButton">Save</button> <!-- Save event -->
-            <button id="cancelButton">Cancel</button> <!-- Close modal -->
-        </div>
-
-        <!-- Event Modal for Viewing/Deleting Events -->
-        <div id="deleteEventModal">
-            <h2>Event</h2> <!-- Modal title -->
-            <p id="eventText"></p> <!-- Displays event details -->
-            <button id="deleteButton">Delete</button> <!-- Delete event -->
-            <button id="closeButton">Close</button> <!-- Close modal -->
-        </div>
-
-        <!-- Modal Backdrop -->
-        <div id="modalBackDrop"></div> <!-- Dark overlay behind modals -->
-    </div>
-</div>
 
 
     <!-- Footer -->
