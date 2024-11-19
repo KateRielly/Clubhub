@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>notifications</title>
-    <!-- can change if we would like, just create a new css page and change that here. -->
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <script type="module" src="script.js"></script>
+    <!-- Fixed the type attribute in the link tag -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+    <title>God</title>
     <script type="module">
          import {checkLogin} from './script.js';
            window.checkLogin = checkLogin;
@@ -14,11 +14,31 @@
     </script> 
 </head>
 <body>
-<body>
-<body>
-    
+    <!-- creates the header box and the title, inside the box -->
+    <header class="header" id="header">
+        <h1>Notifications</h1>
+    </header>
 
-    <header>Here you can view any and all things that have happened! </header>
+    <!-- Creates a bar bellow hearder box with nav buttons -->
+    <div class="nav">
+        <button class="button onclick="location.replace('index.html');">Home</button>
+        <button class="button">Calendar</button>
+        <button class="button">Club Directory</button>
+        <button class="button" onclick="location.replace('notifs.html');" >Notifications </button>
+    </div>
+
+    <br> <br> <br> <br>
+
+    <!-- creates a footer at the bottom of the page -->
+    <div class="footer">
+        <!-- by wraping the logo in another box you can
+          make the image change on hover in css -->
+        <div class="logos">
+            <img class="logo" src= "images/stab_logo.webp" alt="logo">
+        </div>
+        <p class="footnote">Home</p>
+        <p class="footnote">Club Directory</p>
+        <p class="footnote">Profile</p>
+    </div>
 
 </body>
-</html>
