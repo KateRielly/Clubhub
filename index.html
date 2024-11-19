@@ -15,12 +15,19 @@
     </header>
 
     <!-- Creates a bar below header box with nav buttons -->
-    <div class="nav">
-        <button class="button">Home</button>
-        <button class="button">Calendar</button>
-        <button class="button">Club Directory</button>
-        <button class="button">Profile</button>
-    </div>
+ <!-- Creates a bar bellow hearder box with nav buttons -->
+ <script type="module" src="script.js"></script>
+ <script type="module">
+   import {login} from './script.js';
+   window.login = login;
+ </script>
+   <div class="nav">
+       <button class="button">Home</button>
+       <button class="button">Calendar</button>
+       <button class="button">Club Directory</button>
+       <button class="button" onClick = "location.replace('choose.html');">Profile</button>
+   </div>
+
 
     <!-- creates a box to hold the ranking stuff -->
     <div class="rankingsBox">
