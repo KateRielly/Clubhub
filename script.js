@@ -51,3 +51,19 @@ export const checkLogin = async function(){
 }
 
 
+export const checkLoginN = async function(){
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+            window.location.href = "login.html";
+
+      // ...
+    } else{
+      window.location.href = "notifs.html";
+    }
+  });
+}
+
+
+
