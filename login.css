@@ -2,15 +2,27 @@
 body{
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding-bottom: 15px;
-    background-color: rgb(141, 13, 24);
+    background-color: rgba(146, 22, 32, 0.564);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
-
-.login button{
-    cursor: pointer;
-    width: 100px;
-    padding: 4px;
+p{
+    margin: 5px;
+}
+.top{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    align-items: center;
+    padding: 10px;
+    color: black;
+    margin: none;
+    width: 100vw;
+    box-shadow: 0px 5px 20px 0px rgba(120, 10, 19, 0.44);
+}
+img{
+    height: 30px;
 }
 
 .loginBox{
@@ -19,10 +31,54 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 30px;
     padding-left: 100px;
     padding-right: 100px;
-    padding-bottom: 40px;
     border-radius: 10px;
-    box-shadow: 0px 0px 20px 0px rgb(69, 2, 8);
+    box-shadow: 0px 0px 20px 0px rgba(69, 2, 8, 0.453);
+    
+}
+
+.button{
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    padding: 15px;
+    border-radius: 40px;
+    font-size: 20px;
+    border: none;
+    background-color: rgb(141, 13, 24);
+    color: white;
+    margin-top: 25px;
+}
+
+.line{
+    border: none;
+    border-top: 2px dotted lightgray;
+    color: transparent;
+    background-color: transparent;
+    height: 5px;
+    width: 75%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.link{
+    color: black;
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+}
+
+.subheading{
+    font-size: 30px;
+    font-family:Helvetica, sans-serif;
+}
+.text{
+    font-family: Helvetica, sans-serif;
+}
+
+.link:hover{
+    color: rgb(0, 72, 255);
 }
