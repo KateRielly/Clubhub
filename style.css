@@ -139,7 +139,7 @@ sort of conditional statement for how big the mindow is open */
     font-size: 20px;
     margin-left: 2vw;
     margin-right: 2vw;
-    padding: 2vw;
+    padding: .5vw;
     text-align: center;
     background-image: url("images/whiteboard.png");
     background-size: cover;
@@ -184,12 +184,15 @@ resid=zed to fit nicly beside the calendar-- */
 
 /*-- the calendar --*/
 .calendar {
+    position: relative;
     background-color: rgb(237, 237, 237);
     overflow: scroll; /* if content overflows */
     width: 95%;
     color: rgb(141, 13, 24);
     margin-left: 1vw;
 }
+
+
 .Cheader {
     display: flex; 
     justify-content: space-between; /* makes space between header items */
@@ -293,7 +296,7 @@ resid=zed to fit nicly beside the calendar-- */
     font-size: 10px;
     padding: 3px;
     background-color: #58bae4; 
-    color: white;
+    color: black;
     border-radius: 5px;
     max-height: 55px;
     overflow: hidden; 
@@ -305,9 +308,19 @@ resid=zed to fit nicly beside the calendar-- */
     background-color: white;
     border-radius: 5px;
     width: 350px;
-    top: 100px;
-    position: absolute; /* Positions modal relative to viewport? */
+    position: absolute;
+    top: 30%;
+    left: 34%;
     font-family: sans-serif;
+}
+
+.modalBackDrop {
+    display: none; /* Hidden */ 
+    width: 100%; 
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.608); /* Semi-transparent */
 }
 
 #eventTitleInput {
@@ -339,15 +352,6 @@ resid=zed to fit nicly beside the calendar-- */
     font-size: 14px;
 }
 
-#modalBackDrop {
-    display: none; /* Hidden */
-    top: 0px;
-    left: 0px;
-    width: 100%; 
-    height: 100%; 
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent */
-}
 /* has to do with brynne's stuff */
 .tagBox{
     display: flex;
