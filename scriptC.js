@@ -14,11 +14,6 @@
 // const db = getFirestore(app);
 // const auth = getAuth(app);
 
-const calendarHeader = document.querySelector('.Cheader');
-
-// Get its height
-const height = calendarHeader.offsetHeight;
-
 let clicked = null; // Stores the date of the currently clicked day.
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : []; // Retrieves stored events from localStorage or initializes an empty array.
 
@@ -28,9 +23,19 @@ const deleteEventModal = document.getElementById('deleteEventModal'); // Modal f
 const backDrop = document.getElementById('modalBackDrop'); // Background overlay for modals.
 const eventTitleInput = document.getElementById('eventTitleInput'); // Input field for event title.
 
+
 // Opens the appropriate modal based on the clicked date.
 // `date`: The date of the clicked day.
 function openModal(date) {
+    console.log("Click registered"); // Logs the click event.
+
+    clicked = date; // Store the clicked date for later reference.
+    console.log('Creating a new event');
+    newEventModal.style.display = 'block'; // Show the new event modal.
+    backDrop.style.display = 'block'; // Display the backdrop overlay.
+}
+
+function openEventModal(date) {
     console.log("Click registered"); // Logs the click event.
 
     clicked = date; // Store the clicked date for later reference.
@@ -42,14 +47,7 @@ function openModal(date) {
         console.log('Event already exists');
         document.getElementById('eventText').innerText = eventForDay.title; // Display the event's title.
         deleteEventModal.style.display = 'block'; // Show the delete modal for existing events.
-        
-    } else {
-        console.log('Creating a new event');
-        newEventModal.style.display = 'block'; // Show the new event modal.
-
     }
-
-    backDrop.style.display = 'block'; // Display the backdrop overlay.
 }
 
 // Waits for the DOM to fully load before executing.
@@ -91,15 +89,17 @@ document.addEventListener('DOMContentLoaded', function () {
         // Create the correct day string for the previous month (month - 1).
         const dayString = `${month}/${prevMonthDate}/${year}`; // month-1 for previous month
 
+        dayDiv.addEventListener('click', () => openModal(dayString));
+        daysContainer.appendChild(dayDiv);
+
         const eventForDay = events.find(e => e.date === dayString);
         if (eventForDay) {
             const eventDiv = document.createElement('div');
-            eventDiv.classList.add('event');
             eventDiv.innerText = eventForDay.title;
+            eventDiv.addEventListener('click', () => openEventModal(dayString));//IN TESTING
+            eventDiv.classList.add('event');
             dayDiv.appendChild(eventDiv);
         }
-        dayDiv.addEventListener('click', () => openModal(dayString));
-        daysContainer.appendChild(dayDiv);
     }
 
     // Add dates for the current month.
@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const eventDiv = document.createElement('div');
             eventDiv.classList.add('event');
             eventDiv.innerText = eventForDay.title;
+            eventDiv.addEventListener('click', () => openEventModal(dayString));//IN TESTING
             dayDiv.appendChild(eventDiv);
         }
         dayDiv.addEventListener('click', () => openModal(dayString));
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
         dayDiv.innerText = i; // Next month's date.
         dayDiv.classList.add('fade'); // Dim styling for non-current dates.
 
-        // Create the correct day string for the next month (month + 1).
+        // Create the correct day string for the next month ..
         const dayString = `${month + 2}/${i}/${year}`; // month + 2 for next month
 
         const eventForDay = events.find(e => e.date === dayString);
@@ -138,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const eventDiv = document.createElement('div');
             eventDiv.classList.add('event');
             eventDiv.innerText = eventForDay.title;
+            eventDiv.addEventListener('click', () => openEventModal(dayString));//IN TESTING
             dayDiv.appendChild(eventDiv);
         }
         dayDiv.addEventListener('click', () => openModal(dayString));
