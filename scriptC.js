@@ -13,7 +13,7 @@
 // const app = initializeApp(firebaseConfig);
 // const db = getFirestore(app);
 // const auth = getAuth(app);
-
+let nav = 0;
 let clicked = null; // Stores the date of the currently clicked day.
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : []; // Retrieves stored events from localStorage or initializes an empty array.
 
@@ -22,6 +22,11 @@ const newEventModal = document.getElementById('newEventModal'); // Modal for cre
 const deleteEventModal = document.getElementById('deleteEventModal'); // Modal for deleting existing events.
 const backDrop = document.getElementById('modalBackDrop'); // Background overlay for modals.
 const eventTitleInput = document.getElementById('eventTitleInput'); // Input field for event title.
+const monthYear = document.getElementById('month-year'); // Displays the current month and year.
+const daysContainer = document.getElementById('days'); // Container for the calendar days.
+const prevButton = document.getElementById('prev'); // Button to navigate to the previous month.
+const nextButton = document.getElementById('next'); // Button to navigate to the next month.
+
 
 
 // Opens the appropriate modal based on the clicked date.
@@ -36,7 +41,6 @@ function openModal(date) {
 }
 
 function openEventModal(date) {
-    console.log("Click registered"); // Logs the click event.
 
     clicked = date; // Store the clicked date for later reference.
 
@@ -52,11 +56,7 @@ function openEventModal(date) {
 
 // Waits for the DOM to fully load before executing.
 document.addEventListener('DOMContentLoaded', function () {
-    const monthYear = document.getElementById('month-year'); // Displays the current month and year.
-    const daysContainer = document.getElementById('days'); // Container for the calendar days.
-    const prevButton = document.getElementById('prev'); // Button to navigate to the previous month.
-    const nextButton = document.getElementById('next'); // Button to navigate to the next month.
-
+    
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
@@ -95,17 +95,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const eventForDay = events.find(e => e.date === dayString);
         if (eventForDay) {
             const eventDiv = document.createElement('div');
+            eventDiv.classList.add('event');
             eventDiv.innerText = eventForDay.title;
             eventDiv.addEventListener('click', () => openEventModal(dayString));//IN TESTING
-            eventDiv.classList.add('event');
             dayDiv.appendChild(eventDiv);
         }
     }
 
     // Add dates for the current month.
     for (let i = 1; i <= lastDay; i++) {
-        const dayString = `${month + 1}/${i}/${year}`;
         const dayDiv = document.createElement('div');
+        const dayString = `${month + 1}/${i}/${year}`;
         dayDiv.innerText = i; // Current month's date.
 
         if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
