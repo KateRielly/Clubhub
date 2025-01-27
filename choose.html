@@ -18,7 +18,7 @@
   <script type="module">
     import {login, checkLogin} from './script.js';
     window.login = login;
-    window.checkLogin = checkLogin;
+    window.checkLogin = checkLogin();
   </script>
   
 <div class="loginBox">
@@ -29,7 +29,7 @@
 <!-- label and then text  input, both with ids -->
 
   <button class="button" onclick= "location.replace('clubLogin.html');">Club acount</button>
-  <button class="button" onclick = "checkLogin();">Admin</button>
+  <button class="button" onclick = "location.replace('god.html');">Admin</button>
 
     <div class="line"></div>
     <div class="text">don't have a club acount:</div> 
