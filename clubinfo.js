@@ -1,43 +1,51 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-// TODO: import libraries for Cloud Firestore Database
-// https://firebase.google.com/docs/firestore
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fixed the type attribute in the link tag -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="club.js"></script>
+    <title>Club Directory</title>
+    <script type="module">
+    </script> 
+</head>
+<body>
+    <!-- creates the header box and the title, inside the box -->
+    <header class="header" id="header">
+        <h1>Club Directory</h1>
+    </header>
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAH3oWF9S-ePd0352Ca-TdE5cu6oinzlXo",
-    authDomain: "softwareengineering-94854.firebaseapp.com",
-    projectId: "softwareengineering-94854",
-    storageBucket: "softwareengineering-94854.appspot.com",
-    messagingSenderId: "565847408909",
-    appId: "1:565847408909:web:9e116dae6ede6b965bb044"
-  };
+    <!-- Creates a bar bellow hearder box with nav buttons -->
+    <div class="nav">
+        <button class="button" onclick="location.replace('index.html')";>Home</button>
+        <!-- <button class="button">Calendar</button> -->
+        <button class="button" onclick="location.replace('notifs.html');" >Notifications </button>
+        <button class="button">Club Directory</button>
+        <button class="button" onClick = "location.replace('choose.html');">Log in</button>
 
-  // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-// const auth = getAuth(app);
+    </div>
+    <div class="rankingsBox clubDirectoryBox">
+        <h2 class="rankingTitle"> All Clubs</h2>
+        <div class="clubsBox">
+            <button>club test</button>
+            <button>club test2</button>
+        </div>
+    </div>
 
-export const login2 = async function(){
-  console.log("TEST")
-}
+    <br> <br> <br>
 
-export const login = async function(username, password){
-  // var username = document.getElementById('username').value;
-  // var password = document.getElementById('password').value;
-console.log("hello");
-// Add a new document in collection "cities"
-  await setDoc(doc(db, "clubs", username), {
-    Username: username,
-    Password: password
-  }
+    <!-- creates a footer at the bottom of the page -->
+    <div class="footer">
+        <!-- by wraping the logo in another box you can
+          make the image change on hover in css -->
+        <div class="logos">
+            <img class="logo" src= "images/stab_logo.webp" alt="logo">
+        </div>
+        <p class="footnote">Home</p>
+        <p class="footnote">Club Directory</p>
+        <p class="footnote">Profile</p>
 
-);
+    </div>
 
-window.location.href="moreInfo.html";
-}
-
-
-
-//collection --> clubs
-//document
-//fields bio, name, password, username
+</body>
