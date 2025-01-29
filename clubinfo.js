@@ -1,51 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fixed the type attribute in the link tag -->
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="club.js"></script>
-    <title>Club Directory</title>
-    <script type="module">
-    </script> 
-</head>
-<body>
-    <!-- creates the header box and the title, inside the box -->
-    <header class="header" id="header">
-        <h1>Club Directory</h1>
-    </header>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+// TODO: import libraries for Cloud Firestore Database
+// https://firebase.google.com/docs/firestore
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
-    <!-- Creates a bar bellow hearder box with nav buttons -->
-    <div class="nav">
-        <button class="button" onclick="location.replace('index.html')";>Home</button>
-        <!-- <button class="button">Calendar</button> -->
-        <button class="button" onclick="location.replace('notifs.html');" >Notifications </button>
-        <button class="button">Club Directory</button>
-        <button class="button" onClick = "location.replace('choose.html');">Log in</button>
+const firebaseConfig = {
+    apiKey: "AIzaSyAH3oWF9S-ePd0352Ca-TdE5cu6oinzlXo",
+    authDomain: "softwareengineering-94854.firebaseapp.com",
+    projectId: "softwareengineering-94854",
+    storageBucket: "softwareengineering-94854.appspot.com",
+    messagingSenderId: "565847408909",
+    appId: "1:565847408909:web:9e116dae6ede6b965bb044"
+  };
 
-    </div>
-    <div class="rankingsBox clubDirectoryBox">
-        <h2 class="rankingTitle"> All Clubs</h2>
-        <div class="clubsBox">
-            <button>club test</button>
-            <button>club test2</button>
-        </div>
-    </div>
+  // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    <br> <br> <br>
+//changes the sessionStorage to what is in the parameter
+export async function setClub(clubName){
+    //makes a variable called showClub, set its value to be the parameter
+        sessionStorage.setItem("showClub", clubName);
+        console.log(sessionStorage.getItem("showClub"));
+    }
 
-    <!-- creates a footer at the bottom of the page -->
-    <div class="footer">
-        <!-- by wraping the logo in another box you can
-          make the image change on hover in css -->
-        <div class="logos">
-            <img class="logo" src= "images/stab_logo.webp" alt="logo">
-        </div>
-        <p class="footnote">Home</p>
-        <p class="footnote">Club Directory</p>
-        <p class="footnote">Profile</p>
-
-    </div>
-
-</body>
+export async function clubList(){
+    // gets the documents from this query(if a field matches a given criteria)
+    const allClubs = await getDocs(collection(db, "clubs"));    
+    //loops through each club    
+    allClubs.forEach((clubs) => {
+        //makes a button and sets the info the the name of the club
+        var newButton = document.createElement("button");
+        newButton.innerHTML = clubs.data().clubName;
+        //anonymous function that when the button is clicked,
+        //it navigates to the clubDash.html
+        newButton.onclick = function(){
+            //calles the setClub() function and sets the
+            //session storage as the club name
+            setClub(clubs.data().clubName);
+            //change the location of page to clubDash.html
+            window.location.href = "clubDash.html";
+        };
+        //adds the button to the div
+        document.getElementById('clubsBox').appendChild(newButton);
+        document.getElementById('clubsBox').appendChild(document.createElement("br"));
+    });
+}
