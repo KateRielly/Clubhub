@@ -29,6 +29,7 @@ body{
     display: flex;
     background-color: rgb(141, 13, 24);
     justify-content: center;
+    align-items: center;
 
 }
 
@@ -44,6 +45,7 @@ body{
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.3vw;
     color: white;
+    text-decoration: none;
 }
 
 /* hover animation */
@@ -268,16 +270,21 @@ resid=zed to fit nicly beside the calendar-- */
 .days div {
     height: 20%; 
     cursor: pointer; /* Makes cells clickable/look lik they are */
-    background-color: #f4f3f3;
+    background-color: #ffffff;
     transition: background-color 0.3s;
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
 }
 .days div:hover {
-    background-color: white;
+    background-color: rgb(255, 237, 237);
     color: rgb(212, 0, 14); /* Red text on hover */
 }
 /* Different hover effect for today */
 .days .today:hover {
-    background-color: brown; 
+    background-color: rgb(209, 53, 53); 
     color: white;
 }
 
@@ -288,18 +295,29 @@ resid=zed to fit nicly beside the calendar-- */
 }
 .days .fade {
     color: #afadad; /* Faded text for non-current month dates */
+    background-color: #f7f6f6;
+}
+
+.days .fade:hover {
+    color: #afadad; /* Faded text for non-current month dates */
+    background-color: #e1cccc;
 }
 /* --- END CALENDAR --- */
 
 /* --- Calendar event creation stuff --- */
 .event {
+    margin-top: 4px;
+    display: flex;
     font-size: 10px;
-    padding: 3px;
+    padding: 40%;
+    padding-bottom: 0%;
     background-color: #58bae4; 
     color: black;
     border-radius: 5px;
     max-height: 55px;
     overflow: hidden; 
+    align-items: center;
+    justify-content: center;
 }
 
 #newEventModal, #deleteEventModal {
@@ -419,3 +437,32 @@ revealing background image in logos */
 /* -------end of cool logo efect------- */
 /* end of footer */
 
+.clubDirectoryBox{
+    .rankingTitle {
+        margin-bottom: 0%;
+    }
+
+    .clubsBox {
+        display: flex;
+        padding: 0.5%;
+        background-color: rgb(141, 13, 24);
+
+        button{
+            cursor: pointer;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 1vw;
+            padding-right: 1vw;
+            background-color: rgb(255, 255, 255);
+            border-color: black;
+            margin: 2px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.3vw;
+            color: black;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 10px;
+        }
+        
+    }
+}
