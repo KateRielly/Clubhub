@@ -37,6 +37,23 @@ window.location.href="moreInfo.html";
 }
 
 
+export const showClubs = async function(){
+  const databaseItems = await getDocs(collection(db, "clubs"));
+  var names =  document.getElementById("clubs");
+  names.innerHTML = "";
+  databaseItems.forEach((item) => {
+    // for(item.data() in data){
+      var clubTile = document.createElement("button");
+      clubTile.innerHTML=item.data().clubName;
+      clubTile.onclick = function() {
+        location.replace("clubDash.html");
+        //this does somehting when the club tile is clicked
+      }
+    
+      names.appendChild(clubTile);
+    // }
+    });
+  }
 
 //collection --> clubs
 //document
