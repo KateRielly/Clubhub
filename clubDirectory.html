@@ -9,6 +9,11 @@
     <title>Club Directory</title>
     <script type="module">
     </script> 
+    <script type="module">
+        import {showClubs} from './club.js';
+        window.showClubs = showClubs ;
+        showClubs();
+      </script>
 </head>
 <body>
     <!-- creates the header box and the title, inside the box -->
@@ -27,9 +32,8 @@
     </div>
     <div class="rankingsBox clubDirectoryBox">
         <h2 class="rankingTitle"> All Clubs</h2>
-        <div class="clubsBox">
-            <button>club test</button>
-            <button>club test2</button>
+        <div class="clubsBox" id="clubs">
+
         </div>
     </div>
 
@@ -45,6 +49,7 @@
         <p class="footnote">Home</p>
         <p class="footnote">Club Directory</p>
         <p class="footnote">Profile</p>
+
 
     </div>
 
