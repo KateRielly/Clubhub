@@ -5,16 +5,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>replit</title>
-  <link href="login.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
   
   <!-- type must be "module": https://www.w3schools.com/js/js_modules.asp#:~:text=JavaScript%20modules%20allow%20you%20to,in%20the%20tag.-->  
-  <script type="module" src="club.js"></script>
+ 
   <script type="module">
-    import {login} from './script.js';
-    window.login = login;
+    import {register} from './script.js';
+    window.register = register;
   </script>
 
   <br><br/>
@@ -36,8 +36,8 @@
  
   <br><br/>
 
-  <!-- Links to the moreInfo page and calls onclick function login(); uses username and password as parameters -->
-  <a href="moreInfo.html"><button onclick="login(document.getElementById('username').value, document.getElementById('password').value); ">Continue</button></a>
+  <!-- Links to the moreInfo page and calls onclick function register(); uses username and password as parameters -->
+  <button onclick="register(document.getElementById('username').value, document.getElementById('password').value); ">Continue</button>
   
   <br><br/>
   <br><br/>
