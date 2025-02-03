@@ -7,7 +7,7 @@
   <title>replit</title
 
 <!-- link to regular css -->
-  <link href="login.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
   <!-- link to css specific for the multiselect option. Because the code for the multiselect was extensive, it seemed logical to include it on its own page for organizational value. -->
   <link href="MultiSelect.css" rel="stylesheet" type="text/css">
 </head>
@@ -17,8 +17,11 @@
   <!-- type must be "module": https://www.w3schools.com/js/js_modules.asp#:~:text=JavaScript%20modules%20allow%20you%20to,in%20the%20tag.-->  
   <script type="module" src="script.js"></script>
   <script type="module">
-    import {login} from './script.js';
-    window.login = login();
+    import {register, moreInfo} from './script.js';
+    window.register = register;
+    window.moreInfo = moreInfo;
+   
+
   </script>
 
   <br><br/>
@@ -29,7 +32,7 @@
   <br><br/>
 
   <!-- same placeholder option here -->
-<label>Club Name:</label><input type="text" id="username" placeholder = "Type Here">
+<label>Club Name:</label><input type="text" id="clubName" placeholder = "Type Here">
  
   <br><br/>
   
@@ -66,8 +69,33 @@
   
          </div>
       </div>
+      <br>
+      <div id="type">
+        <label for="type">Type of Club:</label>
+           <select id="typeSelection" name="type">
+                  <option value="choose">choose</option>
+                  <option value="L1">L1</option>
+                  <option value="L2">L2</option>
+                  <option value="L3">L3</option>
+  
+           </select>
 
+      <br><br/>
 
+      <!-- same placeholder option here -->
+      <label>Number of Members:</label><input type="text" id="memberCount" placeholder = "Type Here">
+
+      <br><br/>
+
+      <!-- same placeholder option here -->
+    <label>Year Founded:</label><input type="text" id="yearFounded" placeholder = "Type Here">
+     
+      <br><br/>
+
+      <label>Bio:</label>
+      <br><br/>
+      <textarea type="text" id="bio" placeholder = "Type Here"></textarea>
+      <br><br/>
 <script>
     function leaderNumber(){
 
@@ -94,7 +122,9 @@
             leaderOne.innerHTML="Leader Name:";
             document.getElementById("moreOptions").appendChild(document.createElement("br"));
             document.getElementById("moreOptions").appendChild(leaderOne);
-            document.getElementById("moreOptions").appendChild(document.createElement("input"));
+            var inp = document.createElement("input");
+            inp.setAttribute("id", "leader1");
+            document.getElementById("moreOptions").appendChild(inp);
             // .setAtrpute(id)
         }
         // if number = 2, populate 2 blanks for the leaders name below
@@ -106,11 +136,15 @@
             leaderTwo.innerHTML="Leader 2 Name:";
             document.getElementById("moreOptions").appendChild(document.createElement("br"));
             document.getElementById("moreOptions").appendChild(leaderOne);
-            document.getElementById("moreOptions").appendChild(document.createElement("input"));
+            var inp = document.createElement("input");
+            inp.setAttribute("id", "leader1");
+            document.getElementById("moreOptions").appendChild(inp);
 
             document.getElementById("moreOptions").appendChild(document.createElement("br"));
             document.getElementById("moreOptions").appendChild(leaderTwo);
-            document.getElementById("moreOptions").appendChild(document.createElement("input"));
+            var inp2 = document.createElement("input");
+            inp2.setAttribute("id", "leader2");
+            document.getElementById("moreOptions").appendChild(inp2);
         }
         // if number = 3, populate 3 blanks for the leader names below
         else if(number == "three"){
@@ -123,15 +157,21 @@
             leaderThree.innerHTML="Leader 3 Name:";
             document.getElementById("moreOptions").appendChild(document.createElement("br"));
             document.getElementById("moreOptions").appendChild(leaderOne);
-            document.getElementById("moreOptions").appendChild(document.createElement("input"));
+            var inp = document.createElement("input");
+            inp.setAttribute("id", "leader1");
+            document.getElementById("moreOptions").appendChild(inp);
 
             document.getElementById("moreOptions").appendChild(document.createElement("br"));
             document.getElementById("moreOptions").appendChild(leaderTwo);
-            document.getElementById("moreOptions").appendChild(document.createElement("input"));
+            var inp2 = document.createElement("input");
+            inp2.setAttribute("id", "leader2");
+            document.getElementById("moreOptions").appendChild(inp2);
 
             document.getElementById("moreOptions").appendChild(document.createElement("br"));
             document.getElementById("moreOptions").appendChild(leaderThree);
-            document.getElementById("moreOptions").appendChild(document.createElement("input"));
+            var inp3 = document.createElement("input");
+            inp3.setAttribute("id", "leader3");
+            document.getElementById("moreOptions").appendChild(inp3);
         }
 }
 
@@ -146,7 +186,9 @@ function meetingFrequency(){
       diffMeeting.innerHTML="Meeting Time: ";
       document.getElementById("meetingTime").appendChild(document.createElement("br"));
       document.getElementById("meetingTime").appendChild(diffMeeting);
-      document.getElementById("meetingTime").appendChild(document.createElement("input"));
+      var inpM = document.createElement("input");
+        inpM.setAttribute("id", "inpM");
+            document.getElementById("meetingTime").appendChild(inpM);
       // .setAtrpute(id)
   }
 }
@@ -184,10 +226,19 @@ function meetingFrequency(){
     <option value="sports">sports</option>
     <option value="arts">arts</option>
     <option value="service">service</option>
-    <option value="in-service">in-service</option>
     <option value="in-school">in-school</option>
     <option value="out-of-school">out-of-school</option>
     <option value="partner organization">partner organization</option>
+    <option value="tech">tech</option>
+    <option value="science">science</option>
+    <option value="religion">religion</option>
+    <option value="academics">academics</option>
+    <option value="volunteer">volunteer</option>  
+    <option value="part-of-year">part-of-year</option>  
+    <option value="full-year">full-year</option>  
+    <option value="food">food</option>  
+    <option value="health">health</option>  
+
     <!-- if wanted a preselected attribute/tag: -->
     <!-- <option value="Cranberry" selected>Cranberry</option> -->
 
@@ -195,7 +246,10 @@ function meetingFrequency(){
   </div>
   <br><br/>
 
-  <button onclick="login(document.getElementById('username').value, document.getElementById('password').value);">Create New Club</button>
+   <!-- Links to the club dashboard page and calls onclick function moreInfo(); uses blanks as parameters -->
+   <button onclick="moreInfo()">Create New Club</button>
+  
+  
   <!-- adds in multiselect javascript; same as css, just better organized to have its own js -->
   <script src="MultiSelect.js"></script>
 
