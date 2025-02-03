@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
 // TODO: import libraries for Cloud Firestore Database
 // https://firebase.google.com/docs/firestore
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { getFirestore, collection, query, getCountFromServer, where, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAH3oWF9S-ePd0352Ca-TdE5cu6oinzlXo",
@@ -21,40 +21,107 @@ export const login2 = async function(){
   console.log("TEST")
 }
 
-export const login = async function(username, password){
+export const nameNewUser = async function(user, pass){
+  await setDoc(doc(db, "clubs", user), {
+    username: user,
+      password: pass
+  });
+}
+// creates new document in firebase per club; name of document is the username(which users should set as their club's name)
+export const register = async function(user, pass){
   // var username = document.getElementById('username').value;
   // var password = document.getElementById('password').value;
-console.log("hello");
-// Add a new document in collection "cities"
-  await setDoc(doc(db, "clubs", username), {
-    Username: username,
-    Password: password
+  // const docRef = doc(db, "clubs", user);
+  const q = query(collection(db, "clubs"), where("username", "==", user));
+  // const querySnapshot = await getDocs(q);
+  const snapshot = await getCountFromServer(q);
+  console.log(snapshot.data().count);
+  if(snapshot.data().count != 0){
+    console.log("username exists");
+      alert("Username already exists. Choose new username.");
+      return;
   }
+  await setDoc(doc(db, "clubs", user), {
+          username: user,
+          password: pass
+        });
+  // getDoc(docRef)
+  // .then((docSnapshot) => {
+  //   if (docSnapshot.exists()) {
+  //     // Document exists
+  //     console.log("username exists");
+  //     alert("Username already exists. Choose new username.");
+  //     return;
+  //   } 
+  //     // Document does not exist
+  //     console.log("username is available");
+  //     
 
-);
+      console.log(user);
+  // saving username across pages
+  sessionStorage.setItem("username", user);
+  // switches page to more information page beyond registration page
+  window.location.href="moreInfo.html";
+    
+  // })
+  // .catch((error) => {
+  //   console.error("Error checking document:", error);
+  // });
+// Add a new document in collection "clubs"
 
-window.location.href="moreInfo.html";
+  // await addDoc(collection(db, "clubs", user), {
+    
+  // });
+  
 }
 
-
-export const showClubs = async function(){
-  const databaseItems = await getDocs(collection(db, "clubs"));
-  var names =  document.getElementById("clubs");
-  names.innerHTML = "";
-  databaseItems.forEach((item) => {
-    // for(item.data() in data){
-      var clubTile = document.createElement("button");
-      clubTile.innerHTML=item.data().clubName;
-      clubTile.onclick = function() {
-        location.replace("clubDash.html");
-        //this does somehting when the club tile is clicked
-      }
-    
-      names.appendChild(clubTile);
-    // }
-    });
+//onclick function
+export const moreInfo = async function(){
+  // adds leaders to "leaderList" depending on which dropdown chosen/generated
+  var leaderList = [];
+  if (document.getElementById("number").value == "one"){
+    leaderList.push(document.getElementById("leader1").value)
   }
+  else if (document.getElementById("number").value == "two"){
+    leaderList.push(document.getElementById("leader1").value);
+    leaderList.push(document.getElementById("leader2").value);
+  }
+  else if (document.getElementById("number").value == "three"){
+    leaderList.push(document.getElementById("leader1").value);
+    leaderList.push(document.getElementById("leader2").value);
+    leaderList.push(document.getElementById("leader3").value);
+  }
+
+  // adds meetingTime to meetingTime depending on whether dropdown selection or "other" selectiojn
+  var meetingTime  = "";
+  if (document.getElementById("meeting").value == "other"){
+    meetingTime = document.getElementById("inpM").value;
+  }
+  else{
+    meetingTime = document.getElementById("meeting").value;
+  }
+
+//  recieving the username (saved with sessionStorage in register function)
+  await updateDoc(doc(db, "clubs", sessionStorage.getItem("username")), {
+    // adding fields:
+    clubName: document.getElementById("clubName").value,
+    clubLeaders: leaderList,
+    meetingTime: meetingTime,
+    type: document.getElementById("typeSelection").value,
+    // parses it into list instead of string; from sessionStorage from MultiSelect.js page
+    tags: JSON.parse(sessionStorage.getItem("tags")),
+    memberCount: document.getElementById("memberCount").value,
+    yearFounded: document.getElementById("yearFounded").value,
+    bio: document.getElementById("bio").value,
+
+  }
+);
+// each section of this prints correctly into console. selected tags show up as list that updates as new tags added
+// however, only issue is that the clusb thesmelves are not showing up in firebase --> truing to problem solve this next
+}
 
 //collection --> clubs
 //document
 //fields bio, name, password, username
+
+// initialize Firebase
