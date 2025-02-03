@@ -45,3 +45,12 @@ export async function clubList(){
         document.getElementById('clubsBox').appendChild(document.createElement("br"));
     });
 }
+
+
+// export async function clubPage(){
+//     allClubs.forEach((clubs) => {
+//         if(SS == clubName)
+//     }
+//     var aboutUs = document.createElement("h2");
+//     aboutUs.innerHTML = clubs.data().clubName;
+// }
