@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fixed the type attribute in the link tag -->
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js"></script>
+    <script src="club.js"></script>
     <title>clubba hubba</title>
 </head>
 <body>
     <!-- creates the header box and the title, inside the box -->
     <header class="header" id="header">
-        <h1> Club Leader Page</h1>
+        <h1 class="clubName">Club Dashboard</h1>
     </header>
 
     <!-- Creates a bar bellow hearder box with nav buttons -->
     <div class="nav">
-        <button class="button" onclick="location.replace('index.html')";>Home</button>
-        <!-- <button class="button">Calendar</button> -->
-        <button class="button" onclick="location.replace('notifs.html');" >Notifications </button>
-        <button class="button">Club Directory</button>
+        <button class="button" onclick="location.replace('index.html');">Home</button>
+        <button class="button">Calendar</button>
+        <button class="button" onclick="location.replace('clubDirectory.html');">Club Directory</button>
+        <button class="button" onclick="location.replace('login.html');" >Log In </button>
     </div>
 
-    <br> <br> <br>
+    <div class="clubInfo">
+        <div class="wrapperBox">
+        <div class="clubInfoBox bio">About Us:</div>
+        <div class="clubInfoBox quickFacts">Club information:</div>
+        </div>
+        <div class="clubInfoBox lookOut">Next meetings and activities:</div>
+        <div class="clubInfoBox meetingLog">past meetings and activities:</div>
+    </div>
+
+    <br> 
 
     <!-- creates a footer at the bottom of the page -->
     <div class="footer">
