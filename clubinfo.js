@@ -58,6 +58,7 @@ export const showClubs = async function(){
       clubTile.innerHTML=item.data().clubName;
       clubTile.onclick = function() {
         location.replace("clubDash.html");
+        sessionStorage.setItem("club", item.data().clubName);
         //this does somehting when the club tile is clicked
       }
     
@@ -66,10 +67,45 @@ export const showClubs = async function(){
     });
   }
 
-// export async function clubPage(){
-//     allClubs.forEach((clubs) => {
-//         if(SS == clubName)
-//     }
-//     var aboutUs = document.createElement("h2");
-//     aboutUs.innerHTML = clubs.data().clubName;
-// }
+
+export const displayClubInfo = async function(){
+    console.log("displayClubInfo triggered");
+    var name = sessionStorage.getItem("club");
+    const databaseItems = await getDocs(collection(db, "clubs"));
+    var clubName =  document.getElementById("clubName");
+    clubName.innerHTML = "";
+
+    var bio =  document.getElementById("bio");
+    bio.innerHTML = "About Us:";
+
+    var quickFacts =  document.getElementById("quickFacts");
+    quickFacts.innerHTML = "Club information:";
+    
+    databaseItems.forEach((item) => {
+        if(item.data().clubName == name){
+            console.log("match");
+            clubName.innerHTML = item.data().clubName;
+
+            var clubBio = document.createElement("h4");
+            clubBio.innerHTML=item.data().bio;
+
+            var dateFounded = document.createElement("h4");
+            dateFounded.innerHTML=item.data().yearFounded;
+            var meetingPlan = document.createElement("h4");
+            meetingPlan.innerHTML=item.data().meetingTime;
+            var numMembers = document.createElement("h4");
+            numMembers.innerHTML=item.data().memberCount;
+
+            console.log("read comands");
+            bio.appendChild(clubBio);
+            quickFacts.appendChild(dateFounded);
+            quickFacts.appendChild(meetingPlan);
+            quickFacts.appendChild(numMembers);
+            return
+        }
+        else{
+            console.log("no club found")
+        }
+    });
+
+}

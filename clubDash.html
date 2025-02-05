@@ -7,11 +7,16 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="club.js"></script>
     <title>clubba hubba</title>
+    <script type="module">
+        import {displayClubInfo} from './clubinfo.js';
+        window.displayClubInfo = displayClubInfo ;
+        displayClubInfo();
+      </script>
 </head>
 <body>
     <!-- creates the header box and the title, inside the box -->
     <header class="header" id="header">
-        <h1 class="clubName">Club Dashboard</h1>
+        <h1 class="clubName" id="clubName">Club Dashboard</h1>
     </header>
 
     <!-- Creates a bar bellow hearder box with nav buttons -->
@@ -24,8 +29,8 @@
 
     <div class="clubInfo">
         <div class="wrapperBox">
-        <div class="clubInfoBox bio">About Us:</div>
-        <div class="clubInfoBox quickFacts">Club information:</div>
+        <div class="clubInfoBox" id="bio">About Us:</div>
+        <div class="clubInfoBox" id = "quickFacts">Club information:</div>
         </div>
         <div class="clubInfoBox lookOut">Next meetings and activities:</div>
         <div class="clubInfoBox meetingLog">past meetings and activities:</div>
