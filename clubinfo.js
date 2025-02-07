@@ -26,12 +26,12 @@ export async function setClub(clubName){
 export async function clubList(){
     // gets the documents from this query(if a field matches a given criteria)
     const allClubs = await getDocs(collection(db, "clubs"));    
-    //loops through each club    
+    //loops through each club in firebase  
     allClubs.forEach((clubs) => {
-        //makes a button and sets the info the the name of the club
+        //makes a button and sets the name of the button to the name of the club 
         var newButton = document.createElement("button");
         newButton.innerHTML = clubs.data().clubName;
-        //anonymous function that when the button is clicked,
+        //anonymous function that does something when when the button is clicked, -->
         //it navigates to the clubDash.html
         newButton.onclick = function(){
             //calles the setClub() function and sets the
@@ -46,66 +46,23 @@ export async function clubList(){
     });
 }
 
-
-
 export const showClubs = async function(){
+  // sorts through all the clubs in firebase, sets the buttons to go inside the innerHTML 
   const databaseItems = await getDocs(collection(db, "clubs"));
   var names =  document.getElementById("clubs");
   names.innerHTML = "";
   databaseItems.forEach((item) => {
-    // for(item.data() in data){
-      var clubTile = document.createElement("button");
+// for each item in firebase --> creates button and puts it in the specific area 
+    var clubTile = document.createElement("button");
       clubTile.innerHTML=item.data().clubName;
       clubTile.onclick = function() {
         location.replace("clubDash.html");
-        sessionStorage.setItem("club", item.data().clubName);
         //this does somehting when the club tile is clicked
       }
     
       names.appendChild(clubTile);
-    // }
+      
+    //adds them to the appendChild field  }
     });
   }
 
-
-export const displayClubInfo = async function(){
-    console.log("displayClubInfo triggered");
-    var name = sessionStorage.getItem("club");
-    const databaseItems = await getDocs(collection(db, "clubs"));
-    var clubName =  document.getElementById("clubName");
-    clubName.innerHTML = "";
-
-    var bio =  document.getElementById("bio");
-    bio.innerHTML = "About Us:";
-
-    var quickFacts =  document.getElementById("quickFacts");
-    quickFacts.innerHTML = "Club information:";
-    
-    databaseItems.forEach((item) => {
-        if(item.data().clubName == name){
-            console.log("match");
-            clubName.innerHTML = item.data().clubName;
-
-            var clubBio = document.createElement("h4");
-            clubBio.innerHTML=item.data().bio;
-
-            var dateFounded = document.createElement("h4");
-            dateFounded.innerHTML="Date founded: " + item.data().yearFounded;
-            var meetingPlan = document.createElement("h4");
-            meetingPlan.innerHTML="Meeting frequency: " + item.data().meetingTime;
-            var numMembers = document.createElement("h4");
-            numMembers.innerHTML="Number of members: " + item.data().memberCount;
-
-            console.log("read comands");
-            bio.appendChild(clubBio);
-            quickFacts.appendChild(dateFounded);
-            quickFacts.appendChild(meetingPlan);
-            quickFacts.appendChild(numMembers);
-            return
-        }
-        else{
-            console.log("no club found")
-        }
-    });
-
-}
