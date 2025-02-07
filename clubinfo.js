@@ -90,11 +90,11 @@ export const displayClubInfo = async function(){
             clubBio.innerHTML=item.data().bio;
 
             var dateFounded = document.createElement("h4");
-            dateFounded.innerHTML=item.data().yearFounded;
+            dateFounded.innerHTML="Date founded: " + item.data().yearFounded;
             var meetingPlan = document.createElement("h4");
-            meetingPlan.innerHTML=item.data().meetingTime;
+            meetingPlan.innerHTML="Meeting frequency: " + item.data().meetingTime;
             var numMembers = document.createElement("h4");
-            numMembers.innerHTML=item.data().memberCount;
+            numMembers.innerHTML="Number of members: " + item.data().memberCount;
 
             console.log("read comands");
             bio.appendChild(clubBio);
