@@ -49,23 +49,29 @@ export async function clubList(){
 
 
 export const showClubs = async function(){
+  var list1 = [];
+  // sorts through all the clubs in firebase, sets the buttons to go inside the innerHTML 
   const databaseItems = await getDocs(collection(db, "clubs"));
   var names =  document.getElementById("clubs");
   names.innerHTML = "";
   databaseItems.forEach((item) => {
-    // for(item.data() in data){
-      var clubTile = document.createElement("button");
-      clubTile.innerHTML=item.data().clubName;
-      clubTile.onclick = function() {
-        location.replace("clubDash.html");
-        sessionStorage.setItem("club", item.data().clubName);
-        //this does somehting when the club tile is clicked
-      }
-    
-      names.appendChild(clubTile);
-    // }
-    });
-  }
+    list1.push(item.data().clubName);
+    console.log("work");
+  list1.sort();
+    // for each item in firebase --> creates button and puts it in the specific area 
+  });
+  list1.forEach((item1) => {
+    var clubTile = document.createElement("button");
+    clubTile.innerHTML=item1;
+    clubTile.onclick = function() {
+      location.replace("clubDash.html");
+      //this does somehting when the club tile is clicked
+    }
+    names.appendChild(clubTile);
+  //adds them to the appendChild field  }
+  });
+}
+
 
 // -- dispays each clubs information after getting selected/clicked in the club dashboard page --
 export const displayClubInfo = async function(){
