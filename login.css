@@ -10,7 +10,8 @@ body{
 p{
     margin: 5px;
 }
-.top{
+
+.head{
     display: flex;
     flex-direction: row;
     background-color: white;
@@ -21,23 +22,94 @@ p{
     width: 100vw;
     box-shadow: 0px 5px 20px 0px rgba(120, 10, 19, 0.44);
 }
+.rightHead{
+    display: flex; flex-direction: row; 
+    align-items: center; width: 50%;
+    margin-left: 25px;
+}
+.leftHead{
+    display: flex; flex-direction: row; 
+    align-items: center; justify-content: right; width: 50%;
+    margin-right: 25px;
+}
+.headLink{
+    text-decoration: underline;
+}
+.headLink:hover{
+    font-size: 15px;
+}
+
 img{
     height: 30px;
 }
 
-.loginBox{
-    margin-top: 10vw;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30px;
-    padding-left: 100px;
-    padding-right: 100px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px 0px rgba(69, 2, 8, 0.453);
-    
+/* --- loginBox styling --- */
+.loginBox {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 30px 100px; margin-top: 150px; border-radius: 10px;
+    background-color: white; font-family: Helvetica, sans-serif;
+    box-shadow: 0px 5px 15px rgba(120, 10, 19, 0.44);
+    width: 300px;
+}
+
+label {
+    font-size: 16px; font-family: Helvetica, sans-serif;
+    margin: 10px 0 5px 0;
+    color: black;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: rgb(141, 13, 24);
+}
+
+.loginButton {
+    cursor: pointer;
+    width: 50%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: rgb(141, 13, 24);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+}
+.clubLB {
+    width: 100%;
+}
+.loginButton:hover {
+    background-color: rgb(120, 10, 19);
+}
+
+.line {
+    width: 75%;
+    border: none;
+    border-top: 2px dotted lightgray;
+    margin: 15px 0;
+}
+
+.link {
+    color: rgb(141, 13, 24);
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.link:hover {
+    color: rgb(0, 72, 255);
 }
 
 .button{
@@ -72,8 +144,8 @@ img{
 }
 
 .subheading{
-    font-size: 30px;
-    font-family:Helvetica, sans-serif;
+    font-size: 30px; font-family: Helvetica, sans-serif;
+    text-align: center;
 }
 .text{
     font-family: Helvetica, sans-serif;
@@ -82,4 +154,3 @@ img{
 .link:hover{
     color: rgb(0, 72, 255);
 }
- 
