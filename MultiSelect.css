@@ -1,3 +1,41 @@
+body{
+  background-color: rgba(146, 22, 32, 0.564);
+}
+p{
+  margin: 5px;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    align-items: center;
+    padding: 10px;
+    color: black;
+    margin: none;
+    width: 100vw;
+    box-shadow: 0px 5px 20px 0px rgba(120, 10, 19, 0.44);
+}
+.rightHead{
+    display: flex; flex-direction: row; 
+    align-items: center; width: 50%;
+    margin-left: 25px;
+}
+.leftHead{
+    display: flex; flex-direction: row; 
+    align-items: center; justify-content: right; width: 50%;
+    margin-right: 25px;
+}
+.headLink{
+    text-decoration: underline;
+}
+.headLink:hover{
+    font-size: 15px;
+}
+
+img{
+    height: 30px;
+}
+
 /* had to put it in its own div so that styling could work */
 /* had to use flex and then adjust from there, looked bad after flex and then adjusted each section to fix */
 .multi-select {
