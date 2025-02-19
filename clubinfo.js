@@ -49,78 +49,55 @@ export async function clubList(){
 
 
 export const showClubs = async function(){
-  var list1 = [];
-  // sorts through all the clubs in firebase, sets the buttons to go inside the innerHTML 
   const databaseItems = await getDocs(collection(db, "clubs"));
   var names =  document.getElementById("clubs");
   names.innerHTML = "";
   databaseItems.forEach((item) => {
-    list1.push(item.data().clubName);
-    console.log("work");
-  list1.sort();
-    // for each item in firebase --> creates button and puts it in the specific area 
-  });
-  list1.forEach((item1) => {
-    var clubTile = document.createElement("button");
-    clubTile.innerHTML=item1;
-    clubTile.onclick = function() {
-      location.replace("clubDash.html");
-      //this does somehting when the club tile is clicked
-    }
-    names.appendChild(clubTile);
-  //adds them to the appendChild field  }
-  });
-}
+    // for(item.data() in data){
+      var clubTile = document.createElement("button");
+      clubTile.innerHTML=item.data().clubName;
+      clubTile.onclick = function() {
+        location.replace("clubDash.html");
+        sessionStorage.setItem("club", item.data().clubName);
+        //this does somehting when the club tile is clicked
+      }
+    
+      names.appendChild(clubTile);
+    // }
+    });
+  }
 
 
-// -- dispays each clubs information after getting selected/clicked in the club dashboard page --
 export const displayClubInfo = async function(){
     console.log("displayClubInfo triggered");
-    // gets the club name that was clicked from session storage
     var name = sessionStorage.getItem("club");
-    // pulling clubs from database to then sort through
     const databaseItems = await getDocs(collection(db, "clubs"));
-    // gets the text in the header to then clear (default is club dash)
     var clubName =  document.getElementById("clubName");
     clubName.innerHTML = "";
 
-    // gets the elements to append things to from HTML 
-    // and sets their text to something user will understand
     var bio =  document.getElementById("bio");
     bio.innerHTML = "About Us:";
+
     var quickFacts =  document.getElementById("quickFacts");
     quickFacts.innerHTML = "Club information:";
     
-    // sorts through each club until the saved name matched an firebase club 
-    // (this should never not work)
     databaseItems.forEach((item) => {
         if(item.data().clubName == name){
             console.log("match");
-            // sets header to the club name 
-            // (I could have also done this form session storage)
             clubName.innerHTML = item.data().clubName;
 
-            // sets/creates feilds and assighns fire base values to them
             var clubBio = document.createElement("h4");
             clubBio.innerHTML=item.data().bio;
-            var dateFounded = document.createElement("h4");
-            dateFounded.innerHTML="Date founded: " + item.data().yearFounded;
-            var meetingPlan = document.createElement("h4");
-            meetingPlan.innerHTML="Meeting frequency: " + item.data().meetingTime;
-            var numMembers = document.createElement("h4");
-            numMembers.innerHTML="Number of members: " + item.data().memberCount;
 
-            var leaderNames = document.createElement("h4");
-            leaderNames.innerHTML = "Club Leaders: "
-            item.data().clubLeaders.forEach((leader) => {
-              leaderNames.innerHTML += leader + ", ";
-            }); 
-            leaderNames.innerHTML = leaderNames.innerHTML.slice(0,-2);
+            var dateFounded = document.createElement("h4");
+            dateFounded.innerHTML=item.data().yearFounded;
+            var meetingPlan = document.createElement("h4");
+            meetingPlan.innerHTML=item.data().meetingTime;
+            var numMembers = document.createElement("h4");
+            numMembers.innerHTML=item.data().memberCount;
 
             console.log("read comands");
-            // appends created objects to the html
             bio.appendChild(clubBio);
-            quickFacts.appendChild(leaderNames);
             quickFacts.appendChild(dateFounded);
             quickFacts.appendChild(meetingPlan);
             quickFacts.appendChild(numMembers);
@@ -132,19 +109,3 @@ export const displayClubInfo = async function(){
     });
 
 }
-
-// export const sortDate = async function(){
-//   console.log("sorting dates!");
-
-//   var name = sessionStorage.getItem("club");
-//   const databaseItems = await getDocs(collection(db, "clubs"));
-  
-//   var clubBio = document.createElement("h4");
-//   clubBio.innerHTML = "Club Leaders: "
-//   databaseItems.forEach((item) => {
-//     item.data().clubLeaders.forEach((leader) => {
-//       clubBio.innerHTML += leader;
-//     });
-        
-//   });
-// }
