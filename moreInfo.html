@@ -13,7 +13,15 @@
 </head>
 
 <body>
-  
+  <header class="head">
+    <div class="rightHead">
+      <img class="image" src="images/stab_logo.webp" alt="logo">
+      <p>St. Anne's Belfield School</p>
+    </div>
+    <div class="leftHead">
+    </div>
+  </header>
+
   <!-- type must be "module": https://www.w3schools.com/js/js_modules.asp#:~:text=JavaScript%20modules%20allow%20you%20to,in%20the%20tag.-->  
   <script type="module" src="club.js"></script>
   <script type="module">
@@ -25,12 +33,12 @@
   </script>
 
   <br><br/>
-  
-  <header>More Information</header>
+
+  <header id="moreinfoHeader">More Information</header>
+  <div id="moreInfoWrapper">
 
 <!-- label and then text input, both with ids -->
   <br><br/>
-
   <!-- same placeholder option here -->
 <label>Club Name:</label><input type="text" id="clubName" placeholder = "Type Here">
  
@@ -96,6 +104,7 @@
       <br><br/>
       <textarea type="text" id="bio" placeholder = "Type Here"></textarea>
       <br><br/>
+    </div>
 <script>
     function leaderNumber(){
 
@@ -243,12 +252,12 @@ function meetingFrequency(){
     <!-- <option value="Cranberry" selected>Cranberry</option> -->
 
   </select>
-  </div>
+  
   <br><br/>
 
    <!-- Links to the club dashboard page and calls onclick function moreInfo(); uses blanks as parameters -->
-   <button onclick="moreInfo()">Create New Club</button>
-  
+   <button id="createButton" onclick="moreInfo()">Create New Club</button>
+  </div>
   
   <!-- adds in multiselect javascript; same as css, just better organized to have its own js -->
   <script src="MultiSelect.js"></script>
