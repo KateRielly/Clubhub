@@ -19,7 +19,7 @@
  <script type="module" src="script.js"></script>
  <script type="module">
    import {login} from './script.js';
-   window.login = login();
+   window.login = login;
  </script>
    <div class="nav">
        <button class="button">Home</button>
@@ -30,35 +30,49 @@
 
 
     <!-- creates a box to hold the ranking stuff -->
-    <div class="rankingsBox">
-        <h2 class="rankingTitle"> CLUB ENGAGEMENT RANKINGS</h2>
-        <div class="topTenList">
-            <div class="topThree">
-                <img src="images/trophy.png" alt="trophy" class="trophy">
-                First
-                <img src="images/trophy.png" alt="trophy" class="trophy">
-            </div>
-            <div class="topThree">
-                <img src="images/Silver.png" alt="trophy" class="trophy">
-                Second
-                <img src="images/Silver.png" alt="trophy" class="trophy">
-            </div>
-            <div class="topThree">
-                <img src="images/Bronze.png" alt="trophy" class="trophy">
-                Third
-                <img src="images/Bronze.png" alt="trophy" class="trophy">
-            </div>
-            <div class="fourToTen">
-                <p class="ranking">Fourth</p>
-                <p class="ranking">Fifth</p>
-                <p class="ranking">Sixth</p>
-                <p class="ranking">Seventh</p>
-                <p class="ranking">Eighth</p>
-                <p class="ranking">Ninth</p>
-                <p class="ranking">Tenth</p>
+   <div class="rankings">
+        <div class="rankingsBox">
+            <h2 class="rankingTitle"> CLUB ENGAGEMENT RANKINGS (L2)</h2>
+            <div class="topTenList">
+                <div class="topThree">
+                    <img src="images/trophy.png" alt="trophy" class="trophy">
+                    First
+                    <img src="images/trophy.png" alt="trophy" class="trophy">
+                </div>
+                <div class="topThree">
+                    <img src="images/Silver.png" alt="trophy" class="trophy">
+                    Second
+                    <img src="images/Silver.png" alt="trophy" class="trophy">
+                </div>
+                <div class="topThree">
+                    <img src="images/Bronze.png" alt="trophy" class="trophy">
+                    Third
+                    <img src="images/Bronze.png" alt="trophy" class="trophy">
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="rankingsBox">
+            <h2 class="rankingTitle"> CLUB ENGAGEMENT RANKINGS (L3)</h2>
+            <div class="topTenList">
+                <div class="topThree">
+                    <img src="images/trophy.png" alt="trophy" class="trophy">
+                    First
+                    <img src="images/trophy.png" alt="trophy" class="trophy">
+                </div>
+                <div class="topThree">
+                    <img src="images/Silver.png" alt="trophy" class="trophy">
+                    Second
+                    <img src="images/Silver.png" alt="trophy" class="trophy">
+                </div>
+                <div class="topThree">
+                    <img src="images/Bronze.png" alt="trophy" class="trophy">
+                    Third
+                    <img src="images/Bronze.png" alt="trophy" class="trophy">
+                </div>
+            </div>
+        </div>
+   </div>
 
     <!-- Calendar Section -->
     <section id="calendar">  
@@ -75,19 +89,19 @@
                 </div>
                 <div class="options">
                     <!-- Filter checkboxes for different categories -->
-                    <label class="container">STEM
+                    <label class="box">STEM
                         <input type="checkbox"> 
                         <span class="checkmark"></span> <!-- Custom checkbox styling -->
                     </label>
-                    <label class="container">ART
+                    <label class="box">ART
                         <input type="checkbox">
                         <span class="checkmark"></span>
                     </label>
-                    <label class="container">Writing
+                    <label class="box">Writing
                         <input type="checkbox">
                         <span class="checkmark"></span>
                     </label>
-                    <label class="container">Service
+                    <label class="box">Service
                         <input type="checkbox">
                         <span class="checkmark"></span>
                     </label>
@@ -137,6 +151,7 @@
                     <button id="deleteButton">Delete</button> <!-- Delete event -->
                     <button id="closeButton">Close</button> <!-- Close modal -->
                 </div>
+
             </div>
         </div>
 </section>
@@ -148,8 +163,8 @@
     <div class="logos">
         <img class="logo" src="images/stab_logo.webp" alt="logo">
     </div>
-    <p class="footnote" onClick = "location.replace('clubDirectory.html');" >Club Directory</p>
-    <p class="footnote" onClick = "location.replace('login.html');" >Profile</p>
+    <p class="footnote">Club Directory</p>
+    <p class="footnote">Profile</p>
 </div>
 
 <!-- Your scriptC.js -->
