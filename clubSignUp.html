@@ -20,10 +20,9 @@
   </header>
 
   <!-- type must be "module": https://www.w3schools.com/js/js_modules.asp#:~:text=JavaScript%20modules%20allow%20you%20to,in%20the%20tag.-->  
-  <script type="module" src="club.js"></script>
   <script type="module">
-    import {login} from './script.js';
-    window.login = login;
+    import {register} from './club.js';
+    window.register = register;
   </script>
 
   <div class="loginBox">
@@ -34,7 +33,7 @@
       <label>Password:</label><input type="text" id="password" placeholder = "Type Here">
 
       <!-- Links to the moreInfo page and calls onclick function login(); uses username and password as parameters -->
-      <a href="moreInfo.html"><button class="loginButton clubLB" onclick="login(document.getElementById('username').value, document.getElementById('password').value); ">Continue</button></a>
+      <button onclick="register(document.getElementById('username').value, document.getElementById('password').value); ">Continue</button>
       <a href="clubLogin.html"><p></p>Already have a club? Login Here</a>
   </div>
 </body>
