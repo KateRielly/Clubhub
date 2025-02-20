@@ -115,9 +115,11 @@ async function sortDate(id){
   const item = await getDoc(docRef);
   item.data().meetings.forEach((meeting) => {
     //give the object atributes
+    
     let meet = {
       date: meeting.date.toDate(),
-      description: meeting.description
+      description: meeting.description,
+      id: index
       // atendence:
     };
     //checks to see if the date is before or after today and appends it tothe right array
@@ -144,15 +146,23 @@ async function sortDate(id){
     // Assign a class to it
     meetingInfo.classList.add('meetingBox');
     editMeetingDiv.classList.add('editMeetingDiv');
+    var editbutton = document.createElement("button")
+    editbutton.innerHTML = "Delete"
+    // Assign a class to it
+    meetingInfo.classList.add('meetingBox');
+    editMeetingDiv.classList.add('editMeetingDiv');
     meetingDiv.classList.add('meetingDiv');
+    editbutton.classList.add('meetingEdit');
 
+    editMeetingDiv.appendChild(editbutton);
     meetingDiv.appendChild(meetingInfo);
     meetingDiv.appendChild(editMeetingDiv);
-    
+
     meetingInfo.innerHTML = `
       <p>Date: ${meeting.date.toLocaleDateString()}</p>
       <p>Time: ${meeting.date.toLocaleTimeString()}</p>
-      <p>Meeting info: ${meeting.description}</p>
+      <p id="meetingDescription">Meeting info: ${meeting.description}</p>
+      <p id="attendance"></p>
     `;
     outlook.appendChild(meetingDiv);
   });
@@ -187,3 +197,5 @@ async function sortDate(id){
 function compareDates(meetingA, meetingB) {
   return new Date(meetingA.date) - new Date(meetingB.date);
 }
+
+
