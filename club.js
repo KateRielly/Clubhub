@@ -118,6 +118,10 @@ export const moreInfo = async function(){
 );
 // each section of this prints correctly into console. selected tags show up as list that updates as new tags added
 // however, only issue is that the clusb thesmelves are not showing up in firebase --> truing to problem solve this next
+
+  //changes URL
+  sessionStorage.setItem("club", document.getElementById("clubName").value);
+  window.location.href = "clubDash.html";
 }
 
 //collection --> clubs
