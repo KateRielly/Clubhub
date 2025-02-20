@@ -115,11 +115,9 @@ async function sortDate(id){
   const item = await getDoc(docRef);
   item.data().meetings.forEach((meeting) => {
     //give the object atributes
-    
     let meet = {
       date: meeting.date.toDate(),
-      description: meeting.description,
-      id: index
+      description: meeting.description
       // atendence:
     };
     //checks to see if the date is before or after today and appends it tothe right array
@@ -199,3 +197,7 @@ function compareDates(meetingA, meetingB) {
 }
 
 
+
+async function editMeetingInfo(meeting){
+
+}
