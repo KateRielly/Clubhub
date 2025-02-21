@@ -41,6 +41,9 @@ names.appendChild(clubTile);
 // }
 });
 }
+
+
+
 // -- dispays each clubs information after getting selected/clicked in theclub dashboard page --
 export const displayClubInfo = async function(){
 console.log("displayClubInfo triggered");
@@ -94,17 +97,14 @@ quickFacts.appendChild(leaderNames);
 quickFacts.appendChild(dateFounded);
 quickFacts.appendChild(meetingPlan);
 quickFacts.appendChild(numMembers);
-sortDate(item.id);
+displayMeetingInfo(item.id);
 return
 }
-else{
-console.log("no club found")
-}
 });
-}
+} 
 
 
-async function sortDate(id){
+async function displayMeetingInfo(id){
   console.log("sorting dates!");
   const pastMeetings = [];
   const futureMeetings = [];
@@ -113,13 +113,16 @@ async function sortDate(id){
   console.log(today)
   const docRef = doc(db, "clubs", id);
   const item = await getDoc(docRef);
-  item.data().meetings.forEach((meeting) => {
+
+  item.data().meetings.forEach((meeting, index) => {
     //give the object atributes
     let meet = {
       date: meeting.date.toDate(),
-      description: meeting.description
-      // atendence:
+      description: meeting.description,
+      meetingID:index,
+      attendance: meeting.attendance
     };
+    console.log(meet);
     //checks to see if the date is before or after today and appends it tothe right array
     if(meet.date > today){
       futureMeetings.push(meet);
@@ -128,7 +131,7 @@ async function sortDate(id){
       pastMeetings.push(meet);
     }
   });
-  console.log(pastMeetings)
+ 
   //should sort the arrays by time (using helper function)
   pastMeetings.sort(compareDates);
   futureMeetings.sort(compareDates);
@@ -144,39 +147,19 @@ async function sortDate(id){
     // Assign a class to it
     meetingInfo.classList.add('meetingBox');
     editMeetingDiv.classList.add('editMeetingDiv');
-    var editbutton = document.createElement("button")
-    editbutton.innerHTML = "Delete"
+    var editbutton = document.createElement("button");
+    editbutton.innerHTML = "Delete";
+
     // Assign a class to it
     meetingInfo.classList.add('meetingBox');
     editMeetingDiv.classList.add('editMeetingDiv');
     meetingDiv.classList.add('meetingDiv');
     editbutton.classList.add('meetingEdit');
 
-    editMeetingDiv.appendChild(editbutton);
-    meetingDiv.appendChild(meetingInfo);
-    meetingDiv.appendChild(editMeetingDiv);
-
-    meetingInfo.innerHTML = `
-      <p>Date: ${meeting.date.toLocaleDateString()}</p>
-      <p>Time: ${meeting.date.toLocaleTimeString()}</p>
-      <p id="meetingDescription">Meeting info: ${meeting.description}</p>
-      <p id="attendance"></p>
-    `;
-    outlook.appendChild(meetingDiv);
-  });
-
-  //creates proper divs in past meeting section
-  pastMeetings.forEach((meeting) => {
-    var meetingDiv = document.createElement("div");
-    var meetingInfo = document.createElement("div");
-    var editMeetingDiv = document.createElement("div");
-    var editbutton = document.createElement("button")
-    editbutton.innerHTML = "Edit"
-    // Assign a class to it
-    meetingInfo.classList.add('meetingBox');
-    editMeetingDiv.classList.add('editMeetingDiv');
-    meetingDiv.classList.add('meetingDiv');
-    editbutton.classList.add('meetingEdit');
+    editbutton.onclick = function() {
+      // provides the meetingID for my showDeleteModal function
+      showDeleteModal(meeting.meetingID); 
+    };
 
     editMeetingDiv.appendChild(editbutton);
     meetingDiv.appendChild(meetingInfo);
@@ -187,6 +170,85 @@ async function sortDate(id){
       <p>Time: ${meeting.date.toLocaleTimeString()}</p>
       <p>Meeting info: ${meeting.description}</p>
     `;
+    outlook.appendChild(meetingDiv);
+  });
+
+  var addEventDiv = document.createElement("div");
+  var addButton = document.createElement("button");
+  addEventDiv.classList.add('addEventDiv');
+  addButton.classList.add('meetingEdit');
+  addButton.classList.add('addButton');
+  addButton.innerHTML = "register new meeting";
+  addEventDiv.appendChild(addButton);
+  outlook.appendChild(addEventDiv);
+
+  //creates proper divs in past meeting section
+  pastMeetings.forEach((meeting) => {
+    var meetingDiv = document.createElement("div");
+    var meetingInfo = document.createElement("div");
+    var editMeetingDiv = document.createElement("div");
+    var editbutton = document.createElement("button");
+    var saveButton = document.createElement("button");
+    var cancleButton = document.createElement("button");
+    // Set the buttons to be hidden by default
+    saveButton.style.display = "none";
+    cancleButton.style.display = "none";
+    editbutton.innerHTML = "Edit"
+    saveButton.innerHTML = "Save";
+    cancleButton.innerHTML = "Cancle";
+
+    // Assign a class to it
+    meetingInfo.classList.add('meetingBox');
+    editMeetingDiv.classList.add('editMeetingDiv');
+    meetingDiv.classList.add('meetingDiv');
+    editbutton.classList.add('meetingEdit');
+    saveButton.classList.add('meetingEdit');
+    cancleButton.classList.add('meetingEdit');
+    saveButton.classList.add('meetingEditConf');
+    cancleButton.classList.add('meetingEditConf');
+
+    editbutton.id = `editButton-${meeting.meetingID}`;
+    saveButton.id = `saveButton-${meeting.meetingID}`;
+    cancleButton.id = `cancleButton-${meeting.meetingID}`;
+    console.log(cancleButton.id); 
+    console.log(editbutton.id); 
+    console.log(saveButton.id); 
+    
+    //onclick listener for edit button
+    editbutton.onclick = function() {
+      // provides the meetingID for my editMeetingInfo function
+      editMeetingInfo(meeting.meetingID); 
+      editbutton.style.display = "none";
+      saveButton.style.display = "flex";
+      cancleButton.style.display = "flex";
+    };
+    cancleButton.onclick = function() {
+      //reloads page without changing anything
+      location.reload();
+    };
+
+    editMeetingDiv.appendChild(editbutton);
+    editMeetingDiv.appendChild(saveButton);
+    editMeetingDiv.appendChild(cancleButton);
+
+    meetingDiv.appendChild(meetingInfo);
+    meetingDiv.appendChild(editMeetingDiv);
+
+    meetingInfo.innerHTML = `
+      <p>Date: ${meeting.date.toLocaleDateString()}</p>
+      <p>Time: ${meeting.date.toLocaleTimeString()}</p>
+
+      <div class="infoContainer">
+        <span>Attendance:</span>
+        <span id="attendance-${meeting.meetingID}">${meeting.attendance}</span>
+      </div>
+
+      <div class="infoContainer">
+        <span>Meeting recap:</span>
+        <span id="recap-${meeting.meetingID}">${meeting.description}</span>
+      </div>
+    `;
+
     meetingLog.appendChild(meetingDiv);
   });
 }
@@ -196,8 +258,76 @@ function compareDates(meetingA, meetingB) {
   return new Date(meetingA.date) - new Date(meetingB.date);
 }
 
+async function showDeleteModal(meetingID) {
+  // I want to add sone of the meeting info club, date, time
+  // so that the user can see what meeting they are deleteing before they delete it!
 
+  console.log('meeting delete double check!')
+  // clubID should be the name of the club
+  const clubID = sessionStorage.getItem("club"); 
+  console.log(clubID);
+  console.log(meetingID);
+  // Show the delete confirmation modal
+  const modal = document.getElementById("deleteConfModal");
+  modal.style.display = "flex";
+}
 
-async function editMeetingInfo(meeting){
+async function editMeetingInfo(meetingID) {
+  console.log('meeting edit function activated!');
 
+  // Get the actual DOM elements for attendance and recap using dynamic IDs
+  const attendanceElement = document.getElementById(`attendance-${meetingID}`);
+  const recapElement = document.getElementById(`recap-${meetingID}`);
+
+  // Get the text content of these elements
+  const attendanceCount = attendanceElement.textContent.replace('Attendance : ', ''); // Removing "Attendance : " part
+  const meetingRecap = recapElement.textContent.replace('Meeting recap: ', ''); // Removing "Meeting recap: " part
+
+  // Create text input and textarea elements
+  const attendanceInput = document.createElement('input');
+  const recapInput = document.createElement('textarea');
+  attendanceInput.classList.add("attendance");
+  recapInput.id = 'recapInput';
+
+  // Set the value of the input to the current text of the paragraph
+  attendanceInput.value = attendanceCount; // Assigning the text value to the input
+  recapInput.value = meetingRecap; // Assigning the text value to the textarea
+
+  // Replace the paragraph elements with the input boxes
+  attendanceElement.parentNode.replaceChild(attendanceInput, attendanceElement);
+  recapElement.parentNode.replaceChild(recapInput, recapElement);
+
+  // saving info:
+  const saveButtonElement = document.getElementById(`saveButton-${meetingID}`);
+
+  // Add a click event listener for the save button
+  saveButtonElement.onclick = async function() {
+    const clubID = sessionStorage.getItem("club");
+    console.log("Save button clicked!");
+
+    // Get the new values from input fields and removes white space
+    const newAttendanceString = attendanceInput.value.trim();
+    // Convert the string to an integer
+    const newAttendance = parseInt(newAttendanceString, 10); // base 10/normal
+    const newRecap = recapInput.value;
+    //checks to see if the new attendance value works (not zero)
+    if (!isNaN(newAttendance) && newRecap){
+      console.log("read");
+      // Reference to your Firestore document
+      console.log(clubID);
+      console.log(meetingID);
+
+      await updateDoc(doc(db, "clubs", clubID)),{
+        
+      }
+      console.log("hahahaha");
+      // Log success
+      console.log('Document successfully updated!');
+    }
+    else{
+      console.log('failure to update');
+    };
+    console.log("end");
+    location.reload();
+  };
 }
