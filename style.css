@@ -516,14 +516,20 @@ h4{
 }
 
 .editMeetingDiv{
-    display: flex; width: 20%;
-    align-items: center; justify-content: end;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    width: 20%;
 }
 
+
 .meetingEdit{
-    margin-right: 50px; width: 100px; height: 30px;
-    border-radius: 10px; border-color: transparent;
+    width: 100px; height: 30px;
+    border-radius: 10px; border-color: transparent; box-shadow: 0 2px 4px darkgray;
     background-color: rgb(141, 13, 24); color: white; font-weight: bold;
+}
+.meetingEditConf{
+    align-items: center; justify-content: center;
+    margin: 20px;
 }
 
 .meetingEdit:hover{
@@ -534,3 +540,73 @@ h4{
 .directoryTitle{
     padding: 20px; text-align: center; background-color: rgb(232, 185, 185); ;
 }
+
+.addEventDiv{
+    display: flex; align-items: center; justify-content: center;
+    background-color: transparent;
+    padding: 10px;
+}
+
+.addButton{
+    height:fit-content;
+    width: 150px;
+    padding: 5px;
+    font-size: 15px;
+}
+.addButton:hover{
+    font-size: 17px;
+}
+
+.infoContainer{
+    margin-bottom: 10px; margin-left: 4px; padding-bottom: 1px;
+}
+
+.attendance{
+    max-width: 40px;
+}
+
+/* Modal Background - darkens the rest of the screen */
+.confModal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Darken the background */
+    display: none; /* default=Hidden */ z-index: 9999; /* Makes modalabove all elements */
+    justify-content: center; align-items: center; 
+  }
+  
+  /* delete conformation Modal Content */
+  .confModalContent {
+    background-color: #fff;
+    padding: 75px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Modal buttons */
+  .confbtn {
+    background-color: rgb(141, 13, 24);
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-color: black;
+    box-shadow: 0 2px 4px darkgray;
+  }
+  
+  .confbtn:hover {
+    color: black; background-color: white; 
+  }
+  
+  #confCancelDelete {
+    background-color: #8c8c8c; 
+  }
+  
+  #confCancelDelete:hover {
+    color: black; background-color: white; 
+  }
+  /* end of conf modal */
