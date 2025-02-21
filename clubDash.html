@@ -34,8 +34,16 @@
         <div class="clubInfoBox" id ="meetingLog">Past meetings and activities:</div>
     </div>
 
-    <br> 
+    <!-- Hidden Modal for Delete Confirmation -->
+    <div id="deleteConfModal" class="confModal" style="display: none;">
+        <div class="confModalContent">
+        <p>Are you sure you want to delete this meeting?</p>
+        <button id="confDelete" class="confbtn">Yes, Delete</button>
+        <button id="confCancelDelete" class="confbtn" onclick="document.getElementById('deleteConfModal').style.display = 'none';">Cancel</button>
+        </div>
+    </div>
 
+    <br> 
     <!-- creates a footer at the bottom of the page -->
     <div class="footer">
         <!-- by wraping the logo in another box you can
