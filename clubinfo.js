@@ -208,7 +208,7 @@ async function displayMeetingInfo(id){
     //onclick listener for edit button
     editbutton.onclick = function() {
       // provides the meetingID for my editMeetingInfo function
-      editMeetingInfo(meeting.meetingID); 
+      editMeetingInfo(meeting.meetingID, id); 
       editbutton.style.display = "none";
       saveButton.style.display = "flex";
       cancleButton.style.display = "flex";
@@ -263,7 +263,7 @@ async function showDeleteModal(meetingID) {
   modal.style.display = "flex";
 }
 
-async function editMeetingInfo(meetingID) {
+async function editMeetingInfo(meetingID, id) {
   console.log('meeting edit function activated!');
 
   // Get the actual DOM elements for attendance and recap using dynamic IDs
@@ -293,9 +293,12 @@ async function editMeetingInfo(meetingID) {
 
   // Add a click event listener for the save button
   saveButtonElement.onclick = async function() {
-    const clubID = sessionStorage.getItem("club");
     console.log("Save button clicked!");
-
+    const docRef = doc(db, "clubs", id);
+    // Get a reference to the subcollection "all-meetings"
+    const meetingsCollectionRef = collection(docRef, "all-meetings");
+    const databaseItem = doc(meetingsCollectionRef, meetingID);
+    console.log("GAHHHH");
     // Get the new values from input fields and removes white space
     const newAttendanceString = attendanceInput.value.trim();
     // Convert the string to an integer
@@ -303,15 +306,10 @@ async function editMeetingInfo(meetingID) {
     const newRecap = recapInput.value;
     //checks to see if the new attendance value works (not zero)
     if (!isNaN(newAttendance) && newRecap){
-      console.log("read");
-      // Reference to your Firestore document
-      console.log(clubID);
-      console.log(meetingID);
-
-      await updateDoc(doc(db, "clubs", clubID)),{
-
-      }
-      console.log("hahahaha");
+      await updateDoc(databaseItem,{
+        attendance: newAttendance,
+        description: newRecap,
+      });
       // Log success
       console.log('Document successfully updated!');
     }
