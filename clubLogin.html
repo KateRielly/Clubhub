@@ -38,7 +38,7 @@
     <label>Password:</label><input type="text" id="password" placeholder = "Type Here">
 
     <!-- Links to the moreInfo page and calls onclick function login(); uses username and password as parameters -->
-    <a href="clubDash.html"><button class="loginButton clubLB">Login</button></a>
+    <a href="clubDash.html"><button onclick = "sessionStorage.setItem('club', document.getElementById('username').value);" class="loginButton clubLB">Login</button></a>
 
     <!-- still needs to  -->
     <a href="clubSignUp.html"><p></p>Registering a new club? Register here</a>
