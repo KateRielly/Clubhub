@@ -34,7 +34,7 @@ clubTile.classList.add('clubButton');
 clubTile.innerHTML=item.data().clubName;
 clubTile.onclick = function() {
 location.replace("clubDash.html");
-sessionStorage.setItem("club", item.data().clubName);
+sessionStorage.setItem("club", item.data().username);
 //this does somehting when the club tile is clicked
 }
 names.appendChild(clubTile);
@@ -48,9 +48,10 @@ names.appendChild(clubTile);
 export const displayClubInfo = async function(){
 console.log("displayClubInfo triggered");
 // gets the club name that was clicked from session storage
-var name = sessionStorage.getItem("club");
-// pulling clubs from database to then sort through
-const databaseItems = await getDocs(collection(db, "clubs"));
+var parentName = sessionStorage.getItem("club");
+// pulling the specific club from database
+const parentDocRef = doc(db, "clubs", parentName);
+const clubDoc = await getDoc(parentDocRef);
 // gets the text in the header to then clear (default is club dash)
 var clubName = document.getElementById("clubName");
 clubName.innerHTML = "";
@@ -60,32 +61,24 @@ var bio = document.getElementById("bio");
 bio.innerHTML = "About Us:";
 var quickFacts = document.getElementById("quickFacts");
 quickFacts.innerHTML = "Club information:";
-// sorts through each club until the saved name matched an firebase club
-// (this should never not work)
-databaseItems.forEach((item) => {
-if(item.data().clubName == name){
-console.log("match");
+
 // sets header to the club name
 // (I could have also done this form session storage)
-clubName.innerHTML = item.data().clubName;
+clubName.innerHTML = clubDoc.data().clubName;
 // sets/creates feilds and assighns fire base values to them
 var clubBio = document.createElement("h4");
-clubBio.innerHTML=item.data().bio;
+clubBio.innerHTML=clubDoc.data().bio;
 var dateFounded = document.createElement("h4");
-dateFounded.innerHTML="Date founded: " + item.data().yearFounded;
+dateFounded.innerHTML="Date founded: " + clubDoc.data().yearFounded;
 var meetingPlan = document.createElement("h4");
-meetingPlan.innerHTML="Meeting frequency: " +
-
-item.data().meetingTime;
+meetingPlan.innerHTML="Meeting frequency: " + clubDoc.data().meetingTime;
 
 var numMembers = document.createElement("h4");
-numMembers.innerHTML="Number of members: " +
-
-item.data().memberCount;
+numMembers.innerHTML="Number of members: " + clubDoc.data().memberCount;
 
 var leaderNames = document.createElement("h4");
 leaderNames.innerHTML = "Club Leaders: "
-item.data().clubLeaders.forEach((leader) => {
+clubDoc.data().clubLeaders.forEach((leader) => {
 leaderNames.innerHTML += leader + ", ";
 });
 leaderNames.innerHTML = leaderNames.innerHTML.slice(0,-2);
@@ -97,10 +90,8 @@ quickFacts.appendChild(leaderNames);
 quickFacts.appendChild(dateFounded);
 quickFacts.appendChild(meetingPlan);
 quickFacts.appendChild(numMembers);
-displayMeetingInfo(item.id);
+displayMeetingInfo(clubDoc.id);
 return
-}
-});
 } 
 
 
@@ -110,19 +101,21 @@ async function displayMeetingInfo(id){
   const futureMeetings = [];
   //gets todays date
   let today = new Date();
-  console.log(today)
+  // Reference to the club document
   const docRef = doc(db, "clubs", id);
-  const item = await getDoc(docRef);
+  // Get a reference to the subcollection "all-meetings"
+  const meetingsCollectionRef = collection(docRef, "all-meetings");
+  const databaseItems = await getDocs(meetingsCollectionRef); // Now, we are getting the meetings from the subcollection
 
-  item.data().meetings.forEach((meeting, index) => {
+
+  databaseItems.forEach((meeting) => {
     //give the object atributes
     let meet = {
-      date: meeting.date.toDate(),
-      description: meeting.description,
-      meetingID:index,
-      attendance: meeting.attendance
+      date: meeting.data().date.toDate(),
+      description: meeting.data().description,
+      meetingID:meeting.id,
+      attendance: meeting.data().attendance
     };
-    console.log(meet);
     //checks to see if the date is before or after today and appends it tothe right array
     if(meet.date > today){
       futureMeetings.push(meet);
@@ -210,9 +203,7 @@ async function displayMeetingInfo(id){
     editbutton.id = `editButton-${meeting.meetingID}`;
     saveButton.id = `saveButton-${meeting.meetingID}`;
     cancleButton.id = `cancleButton-${meeting.meetingID}`;
-    console.log(cancleButton.id); 
-    console.log(editbutton.id); 
-    console.log(saveButton.id); 
+
     
     //onclick listener for edit button
     editbutton.onclick = function() {
@@ -318,7 +309,7 @@ async function editMeetingInfo(meetingID) {
       console.log(meetingID);
 
       await updateDoc(doc(db, "clubs", clubID)),{
-        
+
       }
       console.log("hahahaha");
       // Log success
