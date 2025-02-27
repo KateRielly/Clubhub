@@ -460,7 +460,7 @@ h4{
 
 
 .meetingEdit{
-    width: 100px; height: 30px;
+    width: 100px; height: 30px; margin: 2px;
     border-radius: 10px; border-color: transparent; box-shadow: 0 2px 4px darkgray;
     background-color: rgb(141, 13, 24); color: white; font-weight: bold;
 }
@@ -480,7 +480,7 @@ h4{
 
 .addEventDiv{
     display: flex; align-items: center; justify-content: center;
-    background-color: black;
+    background-color: transparent;
     padding: 10px;
 }
 
@@ -542,3 +542,12 @@ h4{
     color: black; background-color: white; 
   }
   /* end of conf modal */
+
+  /* Regerster event modal*/
+  .radio-container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    align-items: center; /* Center the items vertically */
+    margin-bottom: 10px; /* Space between radio buttons */
+}
+
+
