@@ -109,28 +109,12 @@ body{
     text-align: center;
     background-image: url("images/whiteboard.png"); background-size: cover;
 }
-
-.infoBox{
-    margin-top: 0px; margin: 2vw;
-    display: flex;
-    background-color: white;
-}
-
-.options{
-    display: flexbox; flex-direction: column; align-items: center;
-    width: 8vw; height: 35vw; padding: 1vw;
-    background-color:lightgray;
-    font-size: 1.5vw;
-}
-.container{
-    margin-bottom: 2vw;
-}
 /* -- creates a colum that can be 
 resid=zed to fit nicly beside the calendar-- */
 /* --- basic information box -- */
 .description {
     height: 8vw; width: 8vw; padding: 1vw;
-    display: flexbox; justify-content: center;
+    display: flex; justify-content: center;
     text-align: center; align-items: center; 
     font-size: 1.5vw; color: white;
     background-color: rgba(141, 13, 24, 0.777); 
@@ -138,11 +122,12 @@ resid=zed to fit nicly beside the calendar-- */
 
 /*-- the calendar --*/
 .calendar {
-    position: relative; margin-left: 1vw; width: 95%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    position: relative; margin-left: 2%; width: 96%;
     background-color: rgb(237, 237, 237); color: rgb(141, 13, 24);
-    overflow: scroll; /* if content overflows */
 }
-
 
 .Cheader {
     /* makes space between header items */
@@ -192,98 +177,50 @@ resid=zed to fit nicly beside the calendar-- */
     display: flex; flex-wrap: wrap; /* Wraps to new lines if needed */
     gap: 4px; margin: 0.75vw;
 }
+.dayName{
+    width: 14.006%; /* Equal width for all cells */
+   text-align: center; align-items: start;
+    border-radius: 5px; padding-top: 1px;
+}
 
 .days {
     /* Space between calendar days */
     gap: 4px; height: 550px; padding-bottom: 5px;
 }
-.weekdays div, .days div {
+
+.actualday{
+    height: 20%; display: flex; flex-direction: column;
+    align-items: center; overflow: scroll;
+    background-color: #ffffff; transition: background-color 0.3s;
+    font-size: 17px;
+    overflow: scroll;
     width: 14.006%; /* Equal width for all cells */
-    text-align: center; align-items: start;
+    text-align: center;
     border-radius: 5px; padding-top: 1px;
 }
 
-.days div {
-    height: 20%; display: flex; flex-direction: column;
-    align-items: center; overflow: scroll;
-    cursor: pointer; /* Makes cells clickable/look lik they are */
-    background-color: #ffffff; transition: background-color 0.3s;
-    font-size: 17px;
-}
-.days div:hover {
-    background-color: rgb(255, 237, 237);
-    color: rgb(212, 0, 14); /* Red text on hover */
-}
-/* Different hover effect for today */
-.days .today:hover {
-    background-color: rgb(209, 53, 53); color: white;
-}
 
 /* Highlights today's date */
 .days .today {
     background-color: rgb(141, 13, 24); color: white;
 }
 .days .fade {
-    color: #afadad; /* Faded text for non-current month dates */
+    color: #666262; /* Faded text for non-current month dates */
     background-color: #f7f6f6;
 }
 
-.days .fade:hover {
-    color: #afadad; /* Faded text for non-current month dates */
-    background-color: #e1cccc;
-}
+.event {
+    text-align: center;
+    background-color: rgba(45, 44, 44, 0.576);
+    font-size: 12px;
+    padding: 2%;
+    margin-top: 5px;
+    color: white;
+    border-radius: 5px;
+} 
+
 /* --- END CALENDAR --- */
 
-/* --- Calendar event creation stuff --- */
-.event {
-    margin-top: 4px;
-    display: flexbox;
-    font-size: 10px;
-    padding: 40%;
-    padding-bottom: 0%;
-    background-color: #58bae4; 
-    color: black;
-    border-radius: 5px;
-    max-height: 55px;
-    overflow: hidden; 
-    align-items: center; justify-content: center;
-} 
-/* is this getting used? */
-
-#newEventModal, #deleteEventModal {
-    display: none; /* Hidden */ position: absolute; top: 30%; left: 34%;
-    padding: 25px; border-radius: 5px; width: 350px;
-    background-color: white; font-family: sans-serif;
-}
-
-.modalBackDrop {
-    display: none; /* Hidden */ position: absolute;
-    width: 100%;  height: 100%;
-    top: 0px;
-    background-color: rgba(0, 0, 0, 0.608); /* Semi-transparent */
-}
-
-#eventTitleInput {
-    padding: 10px; width: 100%; box-sizing: border-box;
-    margin-bottom: 25px; border-radius: 3px;
-    outline: none; border: none; box-shadow: 0px 0px 3px gray;
-}
-
-#eventTitleInput.error {
-    border: 2px solid red;
-}
-
-#cancelButton, #deleteButton {
-    background-color: rgb(141, 13, 24); color: white;
-}
-
-#saveButton, #closeButton {
-    background-color: rgb(146, 146, 146); color: white;
-}
-
-#eventText {
-    font-size: 14px;
-}
 
 /* has to do with brynne's stuff */
 .tagBox{
@@ -543,7 +480,7 @@ h4{
 
 .addEventDiv{
     display: flex; align-items: center; justify-content: center;
-    background-color: transparent;
+    background-color: black;
     padding: 10px;
 }
 
@@ -586,16 +523,11 @@ h4{
   
   /* Modal buttons */
   .confbtn {
-    background-color: rgb(141, 13, 24);
-    color: white;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    border-color: black;
-    box-shadow: 0 2px 4px darkgray;
+    background-color: rgb(141, 13, 24); color: white;
+    padding: 10px 20px; margin: 10px;
+    cursor: pointer; transition: background-color 0.3s ease;
+    border-radius: 10px; font-size: 16px;
+    border-color: black; box-shadow: 0 2px 4px darkgray;
   }
   
   .confbtn:hover {
