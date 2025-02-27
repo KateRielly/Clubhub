@@ -369,11 +369,6 @@ async function editMeetingInfo(meetingID, id) {
   };
 }
 
-
-
-
-
-
 var clubLogin = false;
 export async function cLogin() {
   var docRef = doc(db, "clubs", sessionStorage.getItem("club"))
@@ -381,7 +376,7 @@ export async function cLogin() {
   if (sessionStorage.getItem("password") == docSnap.data().password){
     clubLogin = true;
     console.log("club login working")
-    location.replace(clubDash.html)
+    location.replace("clubDash.html")
   }else{
     alert('Wrong Username or Password')
     console.log("wrong username/password")
