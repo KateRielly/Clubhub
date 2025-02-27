@@ -42,6 +42,28 @@
         <button id="confCancelDelete" class="confbtn" onclick="document.getElementById('deleteConfModal').style.display = 'none';">Cancel</button>
         </div>
     </div>
+    <!-- END OF DELETE CONF MODAL!!!! -->
+
+    <!-- Create new event modal -->
+     <div id="createMeetModal" >
+        <div class="confModalContent">
+            <p>New meeting information</p>
+            <lable>Meeting time:</lable>
+            <input type="time">
+            <label>Meeting description</label>
+            <input type="textarea">
+            <label>Is this meeting an event?</label><br>
+                <div class="radio-container">
+                    <input type="radio" id="yes" name="radio">
+                    <label for="yes" class="radio">Yes</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="no" name="radio">
+                    <label for="no" class="radio">No</label>
+                </div>
+
+        </div>
+     </div>
 
     <br> 
     <!-- creates a footer at the bottom of the page -->
