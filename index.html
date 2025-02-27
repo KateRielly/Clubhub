@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fixed the type attribute in the link tag -->
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="script.js"></script>
+   
     <title>clubba hubba</title>
 </head>
 <body>
@@ -17,9 +17,12 @@
     <!-- Creates a bar below header box with nav buttons -->
  <!-- Creates a bar bellow hearder box with nav buttons -->
  <script type="module" src="script.js"></script>
+ <script type="module" src="./scriptC.js"></script>
  <script type="module">
    import {login} from './script.js';
-   window.login = login;
+   import {addMeetings} from './scriptC.js';
+   window.addMeetings = addMeetings;
+   addMeetings();
  </script>
    <div class="nav">
        <button class="button">Home</button>
@@ -79,34 +82,7 @@
         <div class="calendarTitle">
             <h1>Calendar</h1>
         </div>
-
-            <!-- Info Box for Calendar Filters -->
-        <div class="infoBox">
-            <!-- Filter Options Section -->
-            <div class="filters">
-                <div class="description">
-                    <p>What are you interested in?</p> <!-- Prompt for filters -->
-                </div>
-                <div class="options">
-                    <!-- Filter checkboxes for different categories -->
-                    <label class="box">STEM
-                        <input type="checkbox"> 
-                        <span class="checkmark"></span> <!-- Custom checkbox styling -->
-                    </label>
-                    <label class="box">ART
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="box">Writing
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="box">Service
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-            </div>
+    
 
             <!-- Calendar Display -->
 
@@ -121,36 +97,17 @@
 
                 <!-- Days of the Week -->
                 <div class="weekdays">
-                    <div>Sun</div> <!-- Sunday -->
-                    <div>Mon</div> <!-- Monday -->
-                    <div>Tue</div> <!-- Tuesday -->
-                    <div>Wed</div> <!-- Wednesday -->
-                    <div>Thu</div> <!-- Thursday -->
-                    <div>Fri</div> <!-- Friday -->
-                    <div>Sat</div> <!-- Saturday -->
+                    <div class="dayName">Sun</div> <!-- Sunday -->
+                    <div class="dayName">Mon</div> <!-- Monday -->
+                    <div class="dayName">Tue</div> <!-- Tuesday -->
+                    <div class="dayName">Wed</div> <!-- Wednesday -->
+                    <div class="dayName">Thu</div> <!-- Thursday -->
+                    <div class="dayName">Fri</div> <!-- Friday -->
+                    <div class="dayName">Sat</div> <!-- Saturday -->
                 </div>
 
                 <!-- Calendar Days -->
                 <div class="days" id="days"></div> <!-- Populated dynamically with days -->
-
-                <!-- Modal Backdrop -->
-                <div id="modalBackDrop" class="modalBackDrop"></div> <!-- Dark overlay behind modals -->
-
-                <!-- Event Modal for Adding Events -->
-                <div id="newEventModal">
-                    <h2>New Event</h2> <!-- Modal title -->
-                    <input id="eventTitleInput" placeholder="Event Title" /> <!-- Input for event title -->
-                    <button id="saveButton">Save</button> <!-- Save event -->
-                    <button id="cancelButton">Cancel</button> <!-- Close modal -->
-                </div>
-
-                <!-- Event Modal for Viewing/Deleting Events -->
-                <div id="deleteEventModal">
-                    <h2>Event</h2> <!-- Modal title -->
-                    <p id="eventText"></p> <!-- Displays event details -->
-                    <button id="deleteButton">Delete</button> <!-- Delete event -->
-                    <button id="closeButton">Close</button> <!-- Close modal -->
-                </div>
 
             </div>
         </div>
@@ -168,6 +125,6 @@
 </div>
 
 <!-- Your scriptC.js -->
-<script src="./scriptC.js"></script>
+
 </body>
 </html>
