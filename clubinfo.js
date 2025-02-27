@@ -97,85 +97,98 @@ return
 
 async function displayMeetingInfo(id){
   console.log("sorting dates!");
+
   const pastMeetings = [];
   const futureMeetings = [];
-  //gets todays date
+
+  // Gets today's date to compare meetings.
   let today = new Date();
-  // Reference to the club document
+
+  // Reference to the club document using the passed id.
   const docRef = doc(db, "clubs", id);
-  // Get a reference to the subcollection "all-meetings"
+
+  // Get a reference to the subcollection "all-meetings" within the club document.
   const meetingsCollectionRef = collection(docRef, "all-meetings");
-  const databaseItems = await getDocs(meetingsCollectionRef); // Now, we are getting the meetings from the subcollection
 
+  // Fetch all the meeting documents from the subcollection.
+  const databaseItems = await getDocs(meetingsCollectionRef);
 
+  // Loop through each meeting fetched from Firestore
   databaseItems.forEach((meeting) => {
-    //give the object atributes
+    // Create a meeting object with necessary data.
     let meet = {
       date: meeting.data().date.toDate(),
       description: meeting.data().description,
-      meetingID:meeting.id,
+      meetingID: meeting.id,
       attendance: meeting.data().attendance
     };
-    //checks to see if the date is before or after today and appends it tothe right array
+
+    // Check if the meeting's date is in the future or past and push to appropriate array.
     if(meet.date > today){
-      futureMeetings.push(meet);
+      futureMeetings.push(meet); // Future meeting
     }
     else{
-      pastMeetings.push(meet);
+      pastMeetings.push(meet); // Past meeting
     }
   });
- 
-  //should sort the arrays by time (using helper function)
+  
+  // Sort both future and past meetings by date using helper function (compareDates).
   pastMeetings.sort(compareDates);
   futureMeetings.sort(compareDates);
-  var outlook = document.getElementById("outlook");
-  var meetingLog = document.getElementById("meetingLog");
 
-  //creates proper divs in future meeting section
+  var outlook = document.getElementById("outlook"); // Get reference to "outlook" section.
+  var meetingLog = document.getElementById("meetingLog"); // Get reference to "meetingLog" section.
+
+  // Loop through future meetings and create div elements for each.
   futureMeetings.forEach((meeting) => {
     var meetingDiv = document.createElement("div");
-
     var meetingInfo = document.createElement("div");
     var editMeetingDiv = document.createElement("div");
-    // Assign a class to it
-    meetingInfo.classList.add('meetingBox');
-    editMeetingDiv.classList.add('editMeetingDiv');
+    
+    // Create and style button for deleting the meeting
     var editbutton = document.createElement("button");
     editbutton.innerHTML = "Delete";
-
-    // Assign a class to it
+    
+    // Add appropriate classes for styling
     meetingInfo.classList.add('meetingBox');
     editMeetingDiv.classList.add('editMeetingDiv');
     meetingDiv.classList.add('meetingDiv');
     editbutton.classList.add('meetingEdit');
 
+    // When clicked, it triggers the showDeleteModal with meetingID
     editbutton.onclick = function() {
-      // provides the meetingID for my showDeleteModal function
       showDeleteModal(meeting.meetingID); 
     };
 
+    // Append button and info to the meeting div
     editMeetingDiv.appendChild(editbutton);
     meetingDiv.appendChild(meetingInfo);
     meetingDiv.appendChild(editMeetingDiv);
 
+    // Populate meeting details
     meetingInfo.innerHTML = `
       <p>Date: ${meeting.date.toLocaleDateString()}</p>
       <p>Time: ${meeting.date.toLocaleTimeString()}</p>
       <p>Meeting info: ${meeting.description}</p>
     `;
+
+    // Append the meeting div to the "outlook" section
     outlook.appendChild(meetingDiv);
   });
 
+  // Add button to register a new meeting
   var addEventDiv = document.createElement("div");
   var addButton = document.createElement("button");
   addEventDiv.classList.add('addEventDiv');
   addButton.classList.add('meetingEdit');
   addButton.classList.add('addButton');
   addButton.innerHTML = "register new meeting";
+  
+  // Append the "add new meeting" button
   addEventDiv.appendChild(addButton);
   outlook.appendChild(addEventDiv);
 
-  //creates proper divs in past meeting section
+  // Loop through past meetings and create div elements for each.
   pastMeetings.forEach((meeting) => {
     var meetingDiv = document.createElement("div");
     var meetingInfo = document.createElement("div");
@@ -183,14 +196,15 @@ async function displayMeetingInfo(id){
     var editbutton = document.createElement("button");
     var saveButton = document.createElement("button");
     var cancleButton = document.createElement("button");
-    // Set the buttons to be hidden by default
+
+    // Set buttons to be hidden by default.
     saveButton.style.display = "none";
     cancleButton.style.display = "none";
-    editbutton.innerHTML = "Edit"
+    editbutton.innerHTML = "Edit";
     saveButton.innerHTML = "Save";
     cancleButton.innerHTML = "Cancle";
 
-    // Assign a class to it
+    // Add appropriate classes for styling
     meetingInfo.classList.add('meetingBox');
     editMeetingDiv.classList.add('editMeetingDiv');
     meetingDiv.classList.add('meetingDiv');
@@ -200,24 +214,26 @@ async function displayMeetingInfo(id){
     saveButton.classList.add('meetingEditConf');
     cancleButton.classList.add('meetingEditConf');
 
+    // Set unique ids for buttons using meetingID
     editbutton.id = `editButton-${meeting.meetingID}`;
     saveButton.id = `saveButton-${meeting.meetingID}`;
     cancleButton.id = `cancleButton-${meeting.meetingID}`;
 
-    
-    //onclick listener for edit button
+    // Handle the "Edit" button click
     editbutton.onclick = function() {
-      // provides the meetingID for my editMeetingInfo function
+      // Call the edit function with meetingID and club ID
       editMeetingInfo(meeting.meetingID, id); 
-      editbutton.style.display = "none";
-      saveButton.style.display = "flex";
-      cancleButton.style.display = "flex";
-    };
-    cancleButton.onclick = function() {
-      //reloads page without changing anything
-      location.reload();
+      editbutton.style.display = "none"; // Hide Edit button
+      saveButton.style.display = "flex"; // Show Save button
+      cancleButton.style.display = "flex"; // Show Cancel button
     };
 
+    // Handle the "Cancel" button click
+    cancleButton.onclick = function() {
+      location.reload(); // Reloads the page to revert changes.
+    };
+
+    // Append the buttons and meeting info div
     editMeetingDiv.appendChild(editbutton);
     editMeetingDiv.appendChild(saveButton);
     editMeetingDiv.appendChild(cancleButton);
@@ -225,6 +241,7 @@ async function displayMeetingInfo(id){
     meetingDiv.appendChild(meetingInfo);
     meetingDiv.appendChild(editMeetingDiv);
 
+    // Populate meeting details for past meetings
     meetingInfo.innerHTML = `
       <p>Date: ${meeting.date.toLocaleDateString()}</p>
       <p>Time: ${meeting.date.toLocaleTimeString()}</p>
@@ -240,9 +257,11 @@ async function displayMeetingInfo(id){
       </div>
     `;
 
+    // Append the meeting div to the "meetingLog" section
     meetingLog.appendChild(meetingDiv);
   });
 }
+
 // simple helperfuntion to compare dates durring sorting
 // (I had to look into this, but it should be correct)
 function compareDates(meetingA, meetingB) {
@@ -299,6 +318,11 @@ async function editMeetingInfo(meetingID, id) {
     const meetingsCollectionRef = collection(docRef, "all-meetings");
     const databaseItem = doc(meetingsCollectionRef, meetingID);
     console.log("GAHHHH");
+    const databaseItemSnapshot = await getDoc(databaseItem);
+    // const oldAttendance = databaseItemSnapshot.attendance;
+    // console.log(oldAttendance);
+    // // const isEvent = databaseItemSnapshot.isEvent;
+    // console.log(isEvent);
     // Get the new values from input fields and removes white space
     const newAttendanceString = attendanceInput.value.trim();
     // Convert the string to an integer
@@ -312,6 +336,7 @@ async function editMeetingInfo(meetingID, id) {
       });
       // Log success
       console.log('Document successfully updated!');
+      // updatePoints(id, oldAttendance, newAttendance, isEvent, oldEventStatus);
     }
     else{
       console.log('failure to update');
