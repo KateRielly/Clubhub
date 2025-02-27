@@ -44,6 +44,7 @@ names.appendChild(clubTile);
 
 
 
+
 // -- dispays each clubs information after getting selected/clicked in theclub dashboard page --
 export const displayClubInfo = async function(){
 console.log("displayClubInfo triggered");
@@ -157,7 +158,7 @@ async function displayMeetingInfo(id){
 
     // When clicked, it triggers the showDeleteModal with meetingID
     editbutton.onclick = function() {
-      showDeleteModal(meeting.meetingID); 
+      showDeleteModal(meeting.meetingID, id); 
     };
 
     // Append button and info to the meeting div
@@ -196,6 +197,8 @@ async function displayMeetingInfo(id){
     var editbutton = document.createElement("button");
     var saveButton = document.createElement("button");
     var cancleButton = document.createElement("button");
+    var deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
 
     // Set buttons to be hidden by default.
     saveButton.style.display = "none";
@@ -210,6 +213,7 @@ async function displayMeetingInfo(id){
     meetingDiv.classList.add('meetingDiv');
     editbutton.classList.add('meetingEdit');
     saveButton.classList.add('meetingEdit');
+    deleteButton.classList.add('meetingEdit');
     cancleButton.classList.add('meetingEdit');
     saveButton.classList.add('meetingEditConf');
     cancleButton.classList.add('meetingEditConf');
@@ -233,8 +237,13 @@ async function displayMeetingInfo(id){
       location.reload(); // Reloads the page to revert changes.
     };
 
+    deleteButton.onclick = function() {
+      showDeleteModal(meeting.meetingID,id); 
+    };
+
     // Append the buttons and meeting info div
     editMeetingDiv.appendChild(editbutton);
+    editMeetingDiv.appendChild(deleteButton);
     editMeetingDiv.appendChild(saveButton);
     editMeetingDiv.appendChild(cancleButton);
 
@@ -268,7 +277,7 @@ function compareDates(meetingA, meetingB) {
   return new Date(meetingA.date) - new Date(meetingB.date);
 }
 
-async function showDeleteModal(meetingID) {
+async function showDeleteModal(meetingID, id) {
   // I want to add sone of the meeting info club, date, time
   // so that the user can see what meeting they are deleteing before they delete it!
 
@@ -280,6 +289,20 @@ async function showDeleteModal(meetingID) {
   // Show the delete confirmation modal
   const modal = document.getElementById("deleteConfModal");
   modal.style.display = "flex";
+  document.getElementById('confDelete').onclick = function (){
+    deleteMeeting(meetingID, id);
+  }
+}
+
+async function deleteMeeting(meetingID, id) {
+  console.log('meeting delete function activated...');
+  const docRef = doc(db, "clubs", id);
+    // Get a reference to the subcollection "all-meetings"
+    const meetingsCollectionRef = collection(docRef, "all-meetings");
+    const databaseItem = doc(meetingsCollectionRef, meetingID);
+    await deleteDoc(databaseItem);
+    console.log("deleted!");
+    location.reload();
 }
 
 async function editMeetingInfo(meetingID, id) {
@@ -318,11 +341,11 @@ async function editMeetingInfo(meetingID, id) {
     const meetingsCollectionRef = collection(docRef, "all-meetings");
     const databaseItem = doc(meetingsCollectionRef, meetingID);
     console.log("GAHHHH");
-    const databaseItemSnapshot = await getDoc(databaseItem);
-    // const oldAttendance = databaseItemSnapshot.attendance;
-    // console.log(oldAttendance);
-    // // const isEvent = databaseItemSnapshot.isEvent;
-    // console.log(isEvent);
+            // const databaseItemSnapshot = await getDoc(databaseItem);
+            // const oldAttendance = databaseItemSnapshot.attendance;
+            // console.log(oldAttendance);
+            // // const isEvent = databaseItemSnapshot.isEvent;
+            // console.log(isEvent);
     // Get the new values from input fields and removes white space
     const newAttendanceString = attendanceInput.value.trim();
     // Convert the string to an integer
@@ -345,6 +368,11 @@ async function editMeetingInfo(meetingID, id) {
     location.reload();
   };
 }
+
+
+
+
+
 
 var clubLogin = false;
 export async function cLogin() {
