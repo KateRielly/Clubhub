@@ -545,9 +545,64 @@ h4{
 
   /* Regerster event modal*/
   .radio-container {
-    display: flex; /* Use flexbox for horizontal alignment */
-    align-items: center; /* Center the items vertically */
-    margin-bottom: 10px; /* Space between radio buttons */
+    position: relative;
+    display: inline-block;
+    padding-left: 30px; /* Space for custom radio button */
+    cursor: pointer;
+    font-size: 16px;
+    color: rgb(141, 13, 24);
 }
 
+/* Register event modal */
+.radio-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: rgb(141, 13, 24);
+    font-weight: bold;
+    margin-right: 15px;
+}
 
+/* Hide default radio button */
+.radio-container input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Custom radio button */
+.custom-radio {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgb(141, 13, 24);
+    background-color: white;
+    margin-right: 8px;
+}
+
+/* Inner dot when checked */
+.radio-container input[type="radio"]:checked + .custom-radio::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgb(141, 13, 24);
+}
+
+.eventQuestion{
+   display: block;
+    margin-bottom: 5px;
+}
+
+.meetingAddT{
+    font-size: large;
+    font-weight: bold;
+}
