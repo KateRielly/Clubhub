@@ -2,7 +2,7 @@ import { initializeApp } from
 "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
 // TODO: import libraries for Cloud Firestore Database
 // https://firebase.google.com/docs/firestore
-import { getFirestore, collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc, setDoc, Timestamp} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyAH3oWF9S-ePd0352Ca-TdE5cu6oinzlXo",
@@ -41,6 +41,7 @@ names.appendChild(clubTile);
 // }
 });
 }
+
 
 
 
@@ -422,6 +423,7 @@ async function editMeetingInfo(meetingID, id) {
     location.reload();
   };
 }
+
 
 
 var clubLogin = false;
