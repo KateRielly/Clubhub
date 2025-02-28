@@ -45,25 +45,40 @@
     <!-- END OF DELETE CONF MODAL!!!! -->
 
     <!-- Create new event modal -->
-     <div id="createMeetModal" >
+    <div id="createMeetModal" class="confModal" style="display: none;" data-club-id="">
         <div class="confModalContent">
-            <p>New meeting information</p>
-            <lable>Meeting time:</lable>
-            <input type="time">
-            <label>Meeting description</label>
-            <input type="textarea">
-            <label>Is this meeting an event?</label><br>
-                <div class="radio-container">
-                    <input type="radio" id="yes" name="radio">
-                    <label for="yes" class="radio">Yes</label>
-                </div>
-                <div class="radio-container">
-                    <input type="radio" id="no" name="radio">
-                    <label for="no" class="radio">No</label>
-                </div>
-
+            <p class="meetingAddT">New meeting information</p>
+    
+            <label for="meeting-date">Meeting date:</label>
+            <input type="date" id="meeting-date">
+            <label for="meeting-time">Meeting time:</label>
+            <input type="time" id="meeting-time">
+    
+            <label for="meeting-desc">Meeting description:</label>
+            <textarea id="meeting-desc"></textarea>
+    
+            <label class="eventQuestion">Is this a meeting or an event?</label><br>
+    
+            <label class="radio-container">
+                <input type="radio" name="event" id="yes" value="yes">
+                <span class="custom-radio"></span> Event
+            </label>
+    
+            <label class="radio-container">
+                <input type="radio" name="event" id="no" value="no">
+                <span class="custom-radio"></span> Meeting
+            </label>
+    
+            <br><br>
+    
+            <div>
+                <button class="meetingEdit" onclick="saveMeeting()" id="createMeetButton">Create</button>
+                <button class="meetingEdit" onclick="document.getElementById('createMeetModal').style.display = 'none';">Cancel</button>
+            </div>
         </div>
-     </div>
+    </div>
+<!-- ENDDDDD OF MODAL -->
+
 
     <br> 
     <!-- creates a footer at the bottom of the page -->
