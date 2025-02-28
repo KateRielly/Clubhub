@@ -44,7 +44,6 @@ names.appendChild(clubTile);
 
 
 
-
 // -- dispays each clubs information after getting selected/clicked in theclub dashboard page --
 export const displayClubInfo = async function(){
 console.log("displayClubInfo triggered");
@@ -189,6 +188,10 @@ async function displayMeetingInfo(id){
   addEventDiv.appendChild(addButton);
   outlook.appendChild(addEventDiv);
 
+  addButton.onclick = function() {
+    showEditModal(id); 
+  };
+
   // Loop through past meetings and create div elements for each.
   pastMeetings.forEach((meeting) => {
     var meetingDiv = document.createElement("div");
@@ -275,6 +278,57 @@ async function displayMeetingInfo(id){
 // (I had to look into this, but it should be correct)
 function compareDates(meetingA, meetingB) {
   return new Date(meetingA.date) - new Date(meetingB.date);
+}
+
+async function showEditModal(id){
+  console.log('meeting create modal Opened')
+  // clubID should be the name of the club
+  const clubID = sessionStorage.getItem("club"); 
+  console.log(clubID);
+  // Show the delete confirmation modal
+  const modal = document.getElementById("createMeetModal");
+  modal.style.display = "flex";
+
+  const createButton = document.getElementById("createMeetButton");
+  createButton.onclick = function (){
+    console.log("function create called")
+    createMeeting(id);
+  }
+}
+
+async function createMeeting(id) {
+      // Get input values
+      const meetingDate = document.getElementById("meeting-date").value;
+      const meetingTime = document.getElementById("meeting-time").value;
+      const meetingDesc = document.getElementById("meeting-desc").value;
+      const isAnEvent = document.querySelector('input[name="event"]:checked')?.value === "yes";
+
+      //Checks if the date exists (should allways, but better safe than sorry + added meeting description)
+      if (!meetingDate || !meetingTime || !meetingDesc) {
+        alert("Please fill in all fields!");
+        return;
+    }
+    // Convert date and time input to a Firestore timestamp
+    const [year, month, day] = meetingDate.split("-").map(Number);
+    const [hours, minutes] = meetingTime.split(":").map(Number);
+    const fullDate = new Date(year, month - 1, day, hours, minutes);
+    console.log(fullDate);
+    const meetingTimestamp = Timestamp.fromDate(fullDate);
+
+      // Get a reference to the "all-meetings" subcollection
+      const docRef = doc(db, "clubs", id);
+      const meetingsCollectionRef = collection(docRef, "all-meetings");
+      // Create a new meeting document
+      const newMeetingRef = doc(meetingsCollectionRef); // Auto-generate ID
+      await setDoc(newMeetingRef, {
+          attendance: 0,
+          description: meetingDesc,
+          date: meetingTimestamp,
+          isAnEvent: isAnEvent
+      });
+  
+      console.log("Meeting saved successfully!");
+      location.reload();
 }
 
 async function showDeleteModal(meetingID, id) {
@@ -368,6 +422,7 @@ async function editMeetingInfo(meetingID, id) {
     location.reload();
   };
 }
+
 
 var clubLogin = false;
 export async function cLogin() {
