@@ -37,7 +37,7 @@
     <!-- label and then text input, both with ids -->
     <!-- The "placeholder" is the grey script in the text boxes before you type anything in-->
     <label>Username:</label><input type="text" id="username" placeholder = "Club Name">
-    <label>Password:</label><input type="text" id="password" placeholder = "Type Here">
+    <label>Password:</label><input type="password" id="password" placeholder = "Type Here">
 
     <!-- Links to the moreInfo page and calls onclick function login(); uses username and password as parameters -->
     <button onclick = "sessionStorage.setItem('club', document.getElementById('username').value); sessionStorage.setItem('password', document.getElementById('password').value); cLogin()" class="loginButton clubLB">Login</button>      
