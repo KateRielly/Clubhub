@@ -217,6 +217,7 @@ resid=zed to fit nicly beside the calendar-- */
     margin-top: 5px;
     color: white;
     border-radius: 5px;
+    width: 90%;
 } 
 
 /* --- END CALENDAR --- */
@@ -606,3 +607,6 @@ h4{
     font-size: large;
     font-weight: bold;
 }
+
+
+
