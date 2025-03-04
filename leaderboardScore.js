@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
 // TODO: import libraries for Cloud Firestore Database
 // https://firebase.google.com/docs/firestore
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAH3oWF9S-ePd0352Ca-TdE5cu6oinzlXo",
@@ -45,7 +45,7 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
     var newMeetingPoints = 1;
 
     const docRef = doc(db, "clubs", username);
-    const docSnap = await getDocs(docRef);
+    const docSnap = await getDoc(docRef);
     const pointTotal = docSnap.data().points;
     console.log(pointTotal);
     // const meetingsCollectionRef = collection(docRef, "all-meetings");
@@ -82,27 +82,27 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
 
 ////comparing with leaderboards:::
     const docRefTwoFirst = doc(db, "metadata", "L2first");
-    const docSnapTwoFirst = await getDocs(docRefTwoFirst);
+    const docSnapTwoFirst = await getDoc(docRefTwoFirst);
     const pointL2First = docSnapTwoFirst.data().points;
     
     const docRefTwoSecond = doc(db, "metadata", "L2second");
-    const docSnapTwoSecond = await getDocs(docRefTwoSecond);
+    const docSnapTwoSecond = await getDoc(docRefTwoSecond);
     const pointL2Second = docSnapTwoSecond.data().points;
     
     const docRefTwoThree = doc(db, "metadata", "L2third");
-    const docSnapTwoThird = await getDocs(docRefTwoThree);
+    const docSnapTwoThird = await getDoc(docRefTwoThree);
     const pointL2Third = docSnapTwoThird.data().points;
 
     const docRefThreeFirst = doc(db, "metadata", "L3first");
-    const docSnapThreeFirst = await getDocs(docRefThreeFirst);
+    const docSnapThreeFirst = await getDoc(docRefThreeFirst);
     const pointL3First = docSnapThreeFirst.data().points;
 
     const docRefThreeSecond = doc(db, "metadata", "L3second");
-    const docSnapThreeSecond = await getDocs(docRefThreeSecond);
+    const docSnapThreeSecond = await getDoc(docRefThreeSecond);
     const pointL3Second = docSnapThreeSecond.data().points;
     
     const docRefThreeThird = doc(db, "metadata", "L3third");
-    const docSnapThreeThird = await getDocs(docRefThreeThird);
+    const docSnapThreeThird = await getDoc(docRefThreeThird);
     const pointL3Third = docSnapThreeThird.data().points;
 
     const type = docSnap.data().type;
