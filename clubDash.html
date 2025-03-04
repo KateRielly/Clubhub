@@ -8,8 +8,10 @@
     <script src="club.js"></script>
     <title>clubba hubba</title>
     <script type="module">
-        import {displayClubInfo} from './clubinfo.js';
+        import {displayClubInfo, editVerification} from './clubinfo.js';
         window.displayClubInfo = displayClubInfo ;
+        window.editVerification=editVerification;
+        editVerification();
         displayClubInfo();
       </script>
 </head>
