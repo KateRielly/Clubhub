@@ -426,16 +426,31 @@ async function editMeetingInfo(meetingID, id) {
 
 
 
-var clubLogin = false;
 export async function cLogin() {
   var docRef = doc(db, "clubs", sessionStorage.getItem("club"))
   var docSnap = await getDoc(docRef)
+  sessionStorage.setItem("canEdit" , false)
   if (sessionStorage.getItem("password") == docSnap.data().password){
-    clubLogin = true;
     console.log("club login working")
     location.replace("clubDash.html")
+    sessionStorage.setItem("clubAuth", "true")
   }else{
     alert('Wrong Username or Password')
     console.log("wrong username/password")
+    sessionStorage.setItem("clubAuth", false)
+  }
+}
+
+
+export async function editVerification() {
+  if(sessionStorage.getItem("clubAuth") == "true" ){
+    var docRef = doc(db, "clubs", sessionStorage.getItem("club"))
+    var docSnap = await getDoc(docRef)
+    if(sessionStorage.getItem("password") == docSnap.data().password)
+      sessionStorage.setItem("canEdit" , true)
+      console.log("you can edit this page!!!")
+    }
+  else{
+    console.log("you CANT edit this page");
   }
 }
