@@ -396,17 +396,17 @@ async function editMeetingInfo(meetingID, id) {
   // Get the actual DOM elements for attendance and recap using dynamic IDs
   const attendanceElement = document.getElementById(`attendance-${meetingID}`);
   const recapElement = document.getElementById(`recap-${meetingID}`);
-  const isEventElement = document.getElementById(`type-${meetingID}`);
+  //const isEventElement = document.getElementById(`type-${meetingID}`);
 
   // Get the text content of these elements
   const attendanceCount = attendanceElement.textContent.replace('Attendance : ', ''); // Removing "Attendance : " part
   const meetingRecap = recapElement.textContent.replace('Meeting recap: ', ''); // Removing "Meeting recap: " part
-  const isEvent = isEventElement.textContent.replace('Meeting type: ', '');// Removing "Meeting recap: " part
+  //const isEvent = isEventElement.textContent.replace('Meeting type: ', '');// Removing "Meeting recap: " part
 
   // Create text input and textarea elements
   const attendanceInput = document.createElement('input');
   const recapInput = document.createElement('textarea');
-  const isEventInput = document.createElement('input');
+  //const isEventInput = document.createElement('input');
   attendanceInput.classList.add("attendance");
   recapInput.id = 'recapInput';
 
