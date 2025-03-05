@@ -121,7 +121,8 @@ async function displayMeetingInfo(id){
       date: meeting.data().date.toDate(),
       description: meeting.data().description,
       meetingID: meeting.id,
-      attendance: meeting.data().attendance
+      attendance: meeting.data().attendance,
+      isAnEvent: meeting.data().isAnEvent
     };
 
     // Check if the meeting's date is in the future or past and push to appropriate array.
@@ -168,10 +169,17 @@ async function displayMeetingInfo(id){
     meetingDiv.appendChild(meetingInfo);
     meetingDiv.appendChild(editMeetingDiv);
 
+  var meetingType = "Meeting";
+    if (meeting.isAnEvent == true){
+      meetingType = "Event";
+    }
+
+
     // Populate meeting details
     meetingInfo.innerHTML = `
       <p>Date: ${meeting.date.toLocaleDateString()}</p>
       <p>Time: ${meeting.date.toLocaleTimeString()}</p>
+      <p>Type: ${meetingType}<p>
       <p>Meeting info: ${meeting.description}</p>
     `;
 
@@ -193,7 +201,7 @@ async function displayMeetingInfo(id){
   }
   outlook.appendChild(addEventDiv);
 
-  addButton.onclick = function() {
+    addButton.onclick = function() {
     showEditModal(id); 
   };
 
@@ -204,16 +212,16 @@ async function displayMeetingInfo(id){
     var editMeetingDiv = document.createElement("div");
     var editbutton = document.createElement("button");
     var saveButton = document.createElement("button");
-    var cancleButton = document.createElement("button");
+    var cancelButton = document.createElement("button");
     var deleteButton = document.createElement("button");
     deleteButton.innerHTML = "Delete";
 
     // Set buttons to be hidden by default.
     saveButton.style.display = "none";
-    cancleButton.style.display = "none";
+    cancelButton.style.display = "none";
     editbutton.innerHTML = "Edit";
     saveButton.innerHTML = "Save";
-    cancleButton.innerHTML = "Cancle";
+    cancelButton.innerHTML = "Cancel";
 
     // Add appropriate classes for styling
     meetingInfo.classList.add('meetingBox');
@@ -222,14 +230,14 @@ async function displayMeetingInfo(id){
     editbutton.classList.add('meetingEdit');
     saveButton.classList.add('meetingEdit');
     deleteButton.classList.add('meetingEdit');
-    cancleButton.classList.add('meetingEdit');
+    cancelButton.classList.add('meetingEdit');
     saveButton.classList.add('meetingEditConf');
-    cancleButton.classList.add('meetingEditConf');
+    cancelButton.classList.add('meetingEditConf');
 
     // Set unique ids for buttons using meetingID
     editbutton.id = `editButton-${meeting.meetingID}`;
     saveButton.id = `saveButton-${meeting.meetingID}`;
-    cancleButton.id = `cancleButton-${meeting.meetingID}`;
+    cancelButton.id = `cancelButton-${meeting.meetingID}`;
 
     // Handle the "Edit" button click
     editbutton.onclick = function() {
@@ -237,11 +245,11 @@ async function displayMeetingInfo(id){
       editMeetingInfo(meeting.meetingID, id); 
       editbutton.style.display = "none"; // Hide Edit button
       saveButton.style.display = "flex"; // Show Save button
-      cancleButton.style.display = "flex"; // Show Cancel button
+      cancelButton.style.display = "flex"; // Show Cancel button
     };
 
     // Handle the "Cancel" button click
-    cancleButton.onclick = function() {
+    cancelButton.onclick = function() {
       location.reload(); // Reloads the page to revert changes.
     };
 
@@ -263,6 +271,12 @@ async function displayMeetingInfo(id){
       meetingDiv.appendChild(editMeetingDiv);
     }
 
+        var meetingType = "Meeting";
+    if (meeting.isAnEvent == true){
+      meetingType = "Event";
+    }
+
+
     // Populate meeting details for past meetings
     meetingInfo.innerHTML = `
       <p>Date: ${meeting.date.toLocaleDateString()}</p>
@@ -273,6 +287,11 @@ async function displayMeetingInfo(id){
         <span id="attendance-${meeting.meetingID}">${meeting.attendance}</span>
       </div>
 
+      <div class="infoContainer">
+        <span>Type:</span>
+        <span id="type-${meeting.meetingID}">${meetingType}</span>
+      </div>
+      
       <div class="infoContainer">
         <span>Meeting recap:</span>
         <span id="recap-${meeting.meetingID}">${meeting.description}</span>
@@ -307,38 +326,40 @@ async function showEditModal(id){
 }
 
 async function createMeeting(id) {
-      // Get input values
-      const meetingDate = document.getElementById("meeting-date").value;
-      const meetingTime = document.getElementById("meeting-time").value;
-      const meetingDesc = document.getElementById("meeting-desc").value;
-      const isAnEvent = document.querySelector('input[name="event"]:checked')?.value === "yes";
+  console.log("Create meeting called!");
+  // Get input values
+  const meetingDate = document.getElementById("meeting-date").value;
+  const meetingTime = document.getElementById("meeting-time").value;
+  const meetingDesc = document.getElementById("meeting-desc").value;
+  const isAnEvent = document.querySelector('input[name="event"]:checked')?.value === "yes";
+  console.log("HEEELPPP");
+  //Checks if the date exists (should allways, but better safe than sorry + added meeting description)
+  if (!meetingDate || !meetingTime || !meetingDesc) {
+    alert("Please fill in all fields!");
+    return;
+  }
+  console.log("MMMMMM");
+  // Convert date and time input to a Firestore timestamp
+  const [year, month, day] = meetingDate.split("-").map(Number);
+  const [hours, minutes] = meetingTime.split(":").map(Number);
+  const fullDate = new Date(year, month - 1, day, hours, minutes);
+  console.log(fullDate);
+  const meetingTimestamp = Timestamp.fromDate(fullDate);
 
-      //Checks if the date exists (should allways, but better safe than sorry + added meeting description)
-      if (!meetingDate || !meetingTime || !meetingDesc) {
-        alert("Please fill in all fields!");
-        return;
-    }
-    // Convert date and time input to a Firestore timestamp
-    const [year, month, day] = meetingDate.split("-").map(Number);
-    const [hours, minutes] = meetingTime.split(":").map(Number);
-    const fullDate = new Date(year, month - 1, day, hours, minutes);
-    console.log(fullDate);
-    const meetingTimestamp = Timestamp.fromDate(fullDate);
+    // Get a reference to the "all-meetings" subcollection
+    const docRef = doc(db, "clubs", id);
+    const meetingsCollectionRef = collection(docRef, "all-meetings");
+    // Create a new meeting document
+    const newMeetingRef = doc(meetingsCollectionRef); // Auto-generate ID
+    await setDoc(newMeetingRef, {
+        attendance: 0,
+        description: meetingDesc,
+        date: meetingTimestamp,
+        isAnEvent: isAnEvent
+    });
 
-      // Get a reference to the "all-meetings" subcollection
-      const docRef = doc(db, "clubs", id);
-      const meetingsCollectionRef = collection(docRef, "all-meetings");
-      // Create a new meeting document
-      const newMeetingRef = doc(meetingsCollectionRef); // Auto-generate ID
-      await setDoc(newMeetingRef, {
-          attendance: 0,
-          description: meetingDesc,
-          date: meetingTimestamp,
-          isAnEvent: isAnEvent
-      });
-  
-      console.log("Meeting saved successfully!");
-      location.reload();
+    console.log("Meeting saved successfully!");
+    location.reload();
 }
 
 async function showDeleteModal(meetingID, id) {
@@ -375,14 +396,17 @@ async function editMeetingInfo(meetingID, id) {
   // Get the actual DOM elements for attendance and recap using dynamic IDs
   const attendanceElement = document.getElementById(`attendance-${meetingID}`);
   const recapElement = document.getElementById(`recap-${meetingID}`);
+  const isEventElement = document.getElementById(`type-${meetingID}`);
 
   // Get the text content of these elements
   const attendanceCount = attendanceElement.textContent.replace('Attendance : ', ''); // Removing "Attendance : " part
   const meetingRecap = recapElement.textContent.replace('Meeting recap: ', ''); // Removing "Meeting recap: " part
+  const isEvent = isEventElement.textContent.replace('Meeting type: ', '');// Removing "Meeting recap: " part
 
   // Create text input and textarea elements
   const attendanceInput = document.createElement('input');
   const recapInput = document.createElement('textarea');
+  const isEventInput = document.createElement('input');
   attendanceInput.classList.add("attendance");
   recapInput.id = 'recapInput';
 
@@ -405,11 +429,11 @@ async function editMeetingInfo(meetingID, id) {
     const meetingsCollectionRef = collection(docRef, "all-meetings");
     const databaseItem = doc(meetingsCollectionRef, meetingID);
     console.log("GAHHHH");
-            // const databaseItemSnapshot = await getDoc(databaseItem);
-            // const oldAttendance = databaseItemSnapshot.attendance;
-            // console.log(oldAttendance);
-            // // const isEvent = databaseItemSnapshot.isEvent;
-            // console.log(isEvent);
+    const databaseItemSnapshot = await getDoc(databaseItem);
+    const oldAttendance = databaseItemSnapshot.data().attendance;
+    console.log(oldAttendance);
+    const wasEvent = databaseItemSnapshot.data().isAnEvent;
+    console.log(wasEvent);
     // Get the new values from input fields and removes white space
     const newAttendanceString = attendanceInput.value.trim();
     // Convert the string to an integer
@@ -422,6 +446,7 @@ async function editMeetingInfo(meetingID, id) {
         description: newRecap,
       });
       // Log success
+      await updatePoints(id,oldAttendance, newAttendance, wasEvent, wasEvent);
       console.log('Document successfully updated!');
       // updatePoints(id, oldAttendance, newAttendance, isEvent, oldEventStatus);
     }
