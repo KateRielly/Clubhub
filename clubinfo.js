@@ -422,7 +422,7 @@ async function editMeetingInfo(meetingID, id) {
   const saveButtonElement = document.getElementById(`saveButton-${meetingID}`);
 
   // Add a click event listener for the save button
-  saveButtonElement.onclick = async function() {
+saveButtonElement.onclick = async function() {
     console.log("Save button clicked!");
     const docRef = doc(db, "clubs", id);
     // Get a reference to the subcollection "all-meetings"
