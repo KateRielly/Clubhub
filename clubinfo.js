@@ -162,7 +162,9 @@ async function displayMeetingInfo(id){
     };
 
     // Append button and info to the meeting div
-    editMeetingDiv.appendChild(editbutton);
+    if(sessionStorage.getItem("canEdit") == "true"){
+      editMeetingDiv.appendChild(editbutton);
+    }
     meetingDiv.appendChild(meetingInfo);
     meetingDiv.appendChild(editMeetingDiv);
 
@@ -186,7 +188,9 @@ async function displayMeetingInfo(id){
   addButton.innerHTML = "register new meeting";
   
   // Append the "add new meeting" button
-  addEventDiv.appendChild(addButton);
+  if(sessionStorage.getItem("canEdit") == "true"){
+    addEventDiv.appendChild(addButton);
+  }
   outlook.appendChild(addEventDiv);
 
   addButton.onclick = function() {
@@ -246,13 +250,18 @@ async function displayMeetingInfo(id){
     };
 
     // Append the buttons and meeting info div
-    editMeetingDiv.appendChild(editbutton);
-    editMeetingDiv.appendChild(deleteButton);
-    editMeetingDiv.appendChild(saveButton);
-    editMeetingDiv.appendChild(cancleButton);
+    if(sessionStorage.getItem("canEdit") == "true"){
+      editMeetingDiv.appendChild(editbutton);
+      editMeetingDiv.appendChild(deleteButton);
+      editMeetingDiv.appendChild(saveButton);
+      editMeetingDiv.appendChild(cancleButton);  
+    }
 
+    
     meetingDiv.appendChild(meetingInfo);
-    meetingDiv.appendChild(editMeetingDiv);
+    if(sessionStorage.getItem("canEdit") == "true"){
+      meetingDiv.appendChild(editMeetingDiv);
+    }
 
     // Populate meeting details for past meetings
     meetingInfo.innerHTML = `
@@ -443,14 +452,24 @@ export async function cLogin() {
 
 
 export async function editVerification() {
+  var docRef = doc(db, "clubs", sessionStorage.getItem("club"))
+  var docSnap = await getDoc(docRef)
+  console.log("checking that you're logged in")
+  sessionStorage.setItem("canEdit", "false")
+
   if(sessionStorage.getItem("clubAuth") == "true" ){
-    var docRef = doc(db, "clubs", sessionStorage.getItem("club"))
-    var docSnap = await getDoc(docRef)
-    if(sessionStorage.getItem("password") == docSnap.data().password)
-      sessionStorage.setItem("canEdit" , true)
-      console.log("you can edit this page!!!")
+    if(sessionStorage.getItem("club") == docSnap.data().username){
+      if(sessionStorage.getItem("password") == docSnap.data().password){
+        sessionStorage.setItem("canEdit" , true)
+        console.log("you can edit this page!!!")
+      }else{
+        console.log("you CANT edit this page wrong club password")
+      }  
+    } else{
+      console.log("you CANT edit this page wrong club username")
     }
+  }
   else{
-    console.log("you CANT edit this page");
+    console.log("you CANT edit this page, not logged in")
   }
 }
