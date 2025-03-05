@@ -262,7 +262,7 @@ async function displayMeetingInfo(id){
       editMeetingDiv.appendChild(editbutton);
       editMeetingDiv.appendChild(deleteButton);
       editMeetingDiv.appendChild(saveButton);
-      editMeetingDiv.appendChild(cancleButton);  
+      editMeetingDiv.appendChild(cancelButton);  
     }
 
     
