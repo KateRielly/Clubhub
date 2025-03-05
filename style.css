@@ -337,6 +337,14 @@ h4{
     transform: scale(1.02);
 }
 
+#meetingLog{
+    max-height: 500px;
+    overflow: scroll;
+}
+#outlook{
+    max-height: 500px;
+    overflow: scroll;
+}
 
 
 .clubDirectoryBox{
