@@ -36,6 +36,7 @@ const db = getFirestore(app);
 
 export const updatePoints = async function(clubUsername, oAttendance, nAttendance, oldEventBoolean, eventBoolean){
    //in Kate's code
+   console.log("updatePoints was called!!!!");
     var username = clubUsername;
     var oldAttendance = oAttendance;
     var newAttendance = nAttendance;
@@ -43,7 +44,6 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
     var oldEventPoint = 0;
     var newEvent = eventBoolean;
     var newMeetingPoints = 1;
-
     const docRef = doc(db, "clubs", username);
     const docSnap = await getDoc(docRef);
     const pointTotal = docSnap.data().points;
