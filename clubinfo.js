@@ -447,6 +447,7 @@ export async function cLogin() {
     alert('Wrong Username or Password')
     console.log("wrong username/password")
     sessionStorage.setItem("clubAuth", false)
+    alert("Wrong Username or Password");
   }
 }
 
