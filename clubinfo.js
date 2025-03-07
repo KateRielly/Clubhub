@@ -453,6 +453,7 @@ async function editMeetingInfo(meetingID, id) {
     }
     else{
       console.log('failure to update');
+      alert("failure to update");
     };
     console.log("end");
     location.reload();
