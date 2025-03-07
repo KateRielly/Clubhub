@@ -3,6 +3,7 @@ import { initializeApp } from
 // TODO: import libraries for Cloud Firestore Database
 // https://firebase.google.com/docs/firestore
 import { getFirestore, collection, addDoc, getDocs,getDoc, doc, updateDoc, deleteDoc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import {updatePoints} from "./leaderBoardScore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyAH3oWF9S-ePd0352Ca-TdE5cu6oinzlXo",
@@ -429,7 +430,6 @@ async function editMeetingInfo(meetingID, id) {
     // Get a reference to the subcollection "all-meetings"
     const meetingsCollectionRef = collection(docRef, "all-meetings");
     const databaseItem = doc(meetingsCollectionRef, meetingID);
-    console.log("GAHHHH");
     const databaseItemSnapshot = await getDoc(databaseItem);
     const oldAttendance = databaseItemSnapshot.data().attendance;
     console.log(oldAttendance);
@@ -446,8 +446,9 @@ async function editMeetingInfo(meetingID, id) {
         attendance: newAttendance,
         description: newRecap,
       });
+      console.log("GAHHHH");
       // Log success
-      await updatePoints(id,oldAttendance, newAttendance, wasEvent, wasEvent);
+      await updatePoints(id, oldAttendance, newAttendance, wasEvent, wasEvent);
       console.log('Document successfully updated!');
       // updatePoints(id, oldAttendance, newAttendance, isEvent, oldEventStatus);
     }
