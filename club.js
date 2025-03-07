@@ -131,7 +131,7 @@ export const moreInfo = async function(){
 // however, only issue is that the clusb thesmelves are not showing up in firebase --> truing to problem solve this next
 
 //changes URL
-  sessionStorage.setItem("club", document.getElementById(username).value);
+  sessionStorage.setItem("club", document.getElementById("clubName").value);
   window.location.href = "clubDash.html";
 }
 
