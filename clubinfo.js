@@ -244,6 +244,7 @@ async function displayMeetingInfo(id){
       // Call the edit function with meetingID and club ID
       editMeetingInfo(meeting.meetingID, id); 
       editbutton.style.display = "none"; // Hide Edit button
+      deleteButton.style.display = "none"
       saveButton.style.display = "flex"; // Show Save button
       cancelButton.style.display = "flex"; // Show Cancel button
     };
