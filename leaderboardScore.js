@@ -281,22 +281,22 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
     export const loadLeaderboard = async function(){
       //appending to leaderboard - L2
      const docRefTwoFirst = doc(db, "metadata", "L2first");
-     const docSnapTwoFirst = await getDocs(docRefTwoFirst);
+     const docSnapTwoFirst = await getDoc(docRefTwoFirst);
             
      const docRefTwoSecond = doc(db, "metadata", "L2second");
-     const docSnapTwoSecond = await getDocs(docRefTwoSecond);
+     const docSnapTwoSecond = await getDoc(docRefTwoSecond);
             
      const docRefTwoThree = doc(db, "metadata", "L2third");
-     const docSnapTwoThird = await getDocs(docRefTwoThree);
+     const docSnapTwoThird = await getDoc(docRefTwoThree);
         
      const docRefThreeFirst = doc(db, "metadata", "L3first");
-     const docSnapThreeFirst = await getDocs(docRefThreeFirst);
+     const docSnapThreeFirst = await getDoc(docRefThreeFirst);
         
      const docRefThreeSecond = doc(db, "metadata", "L3second");
-     const docSnapThreeSecond = await getDocs(docRefThreeSecond);
+     const docSnapThreeSecond = await getDoc(docRefThreeSecond);
             
      const docRefThreeThird = doc(db, "metadata", "L3third");
-     const docSnapThreeThird = await getDocs(docRefThreeThird);
+     const docSnapThreeThird = await getDoc(docRefThreeThird);
        
      var L2First = document.getElementById("firstLTwo");
      L2First.innerHTML = docSnapTwoFirst.data().clubName;
