@@ -118,7 +118,7 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
     //L2
     if (type == "L2"){
         if (newTotal > pointL2First){
-          await updateDoc(doc(db, "clubs", "L2first"), {
+          await updateDoc(doc(db, "metadata", "L2first"), {
             clubName: clubUsername,
             points: newTotal,
           });
@@ -130,22 +130,22 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
           var oldSecondPlaceL2 = docSnapTwoSecond.data().points;
           var oldSecondPlaceL2Name = docSnapTwoSecond.data().clubName;
           
-          await updateDoc(doc(db, "clubs", "L2first"), {
+          await updateDoc(doc(db, "metadata", "L2first"), {
             clubName: clubUsername,
             points: newTotal,
           });
-          await updateDoc(doc(db, "clubs", "L2second"), {
+          await updateDoc(doc(db, "metadata", "L2second"), {
             clubName: oldFirstPlaceL2Name,
             points: oldFirstPlaceL2,
           });
-          await updateDoc(doc(db, "clubs", "L2third"), {
+          await updateDoc(doc(db, "metadata", "L2third"), {
             clubName: oldSecondPlaceL2Name,
             points: oldSecondPlaceL2,
           });
 
         }
         else if(newTotal > pointL2Second){
-          await updateDoc(doc(db, "clubs", "L2second"), {
+          await updateDoc(doc(db, "metadata", "L2second"), {
             clubName: clubUsername,
             points: newTotal,
           });
@@ -154,17 +154,17 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
           var oldSecondPlaceL2 = docSnapTwoSecond.data().points;
           var oldSecondPlaceL2Name = docSnapTwoSecond.data().clubName;
           
-          await updateDoc(doc(db, "clubs", "L2second"), {
+          await updateDoc(doc(db, "metadata", "L2second"), {
             clubName: clubUsername,
             points: newTotal,
           });
-          await updateDoc(doc(db, "clubs", "L2third"), {
+          await updateDoc(doc(db, "metadata", "L2third"), {
             clubName: oldSecondPlaceL2Name,
             points: oldSecondPlaceL2,
           });
         }
         else if(newTotal >= pointL2Third){
-          await updateDoc(doc(db, "clubs", "L2third"), {
+          await updateDoc(doc(db, "metadata", "L2third"), {
             clubName: clubUsername,
             points: newTotal,
           });
@@ -174,7 +174,7 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
       //L3
       if (type == "L3"){
         if (newTotal > pointL3First){
-          await updateDoc(doc(db, "clubs", "L3first"), {
+          await updateDoc(doc(db, "metadata", "L3first"), {
             clubName: clubUsername,
             points: newTotal,
           });
@@ -186,22 +186,22 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
           var oldSecondPlaceL3 = docSnapThreeSecond.data().points;
           var oldSecondPlaceL3Name = docSnapThreeSecond.data().clubName;
           
-          await updateDoc(doc(db, "clubs", "L3first"), {
+          await updateDoc(doc(db, "metadata", "L3first"), {
             clubName: clubUsername,
             points: newTotal,
           });
-          await updateDoc(doc(db, "clubs", "L3second"), {
+          await updateDoc(doc(db, "metadata", "L3second"), {
             clubName: oldFirstPlaceL3Name,
             points: oldFirstPlaceL3,
           });
-          await updateDoc(doc(db, "clubs", "L3third"), {
+          await updateDoc(doc(db, "metadata", "L3third"), {
             clubName: oldSecondPlaceL3Name,
             points: oldSecondPlaceL3,
           });
 
         }
         else if(newTotal > pointL3Second){
-          await updateDoc(doc(db, "clubs", "L3second"), {
+          await updateDoc(doc(db, "metadata", "L3second"), {
             clubName: clubUsername,
             points: newTotal,
           });
@@ -210,17 +210,17 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
           var oldSecondPlaceL3 = docSnapThreeSecond.data().points;
           var oldSecondPlaceL3Name = docSnapThreeSecond.data().clubName;
           
-          await updateDoc(doc(db, "clubs", "L3second"), {
+          await updateDoc(doc(db, "metadata", "L3second"), {
             clubName: clubUsername,
             points: newTotal,
           });
-          await updateDoc(doc(db, "clubs", "L3third"), {
+          await updateDoc(doc(db, "metadata", "L3third"), {
             clubName: oldSecondPlaceL3Name,
             points: oldSecondPlaceL3,
           });
         }
         else if(newTotal >= pointL3Third){
-          await updateDoc(doc(db, "clubs", "L3third"), {
+          await updateDoc(doc(db, "metadata", "L3third"), {
             clubName: clubUsername,
             points: newTotal,
           });
@@ -299,21 +299,21 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
      const docSnapThreeThird = await getDocs(docRefThreeThird);
        
      var L2First = document.getElementById("firstLTwo");
-     L2First.innerHTMl = docSnapTwoFirst.data().clubName;
+     L2First.innerHTML = docSnapTwoFirst.data().clubName;
       
      var L2Second = document.getElementById("secondLTwo");
-     L2Second.innerHTMl = docSnapTwoSecond.data().clubName;
+     L2Second.innerHTML = docSnapTwoSecond.data().clubName;
 
      var L2Third = document.getElementById("thirdLTwo");
-     L2Third.innerHTMl = docSnapTwoThird.data().clubName;
+     L2Third.innerHTML = docSnapTwoThird.data().clubName;
 
      var L2First = document.getElementById("firstLTwo");
-     L2First.innerHTMl = docSnapThreeFirst.data().clubName;
+     L2First.innerHTML = docSnapThreeFirst.data().clubName;
 
      var L2First = document.getElementById("firstLTwo");
-     L2First.innerHTMl = docSnapThreeSecond.data().clubName;
+     L2First.innerHTML = docSnapThreeSecond.data().clubName;
 
      var L2First = document.getElementById("firstLTwo");
-     L2First.innerHTMl = docSnapThreeThird.data().clubName;
+     L2First.innerHTML = docSnapThreeThird.data().clubName;
 
     }
