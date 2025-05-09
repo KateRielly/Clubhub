@@ -36,26 +36,40 @@ const db = getFirestore(app);
 
 export const updatePoints = async function(clubUsername, oAttendance, nAttendance, oldEventBoolean, eventBoolean){
    //in Kate's code
+
+   console.log(clubUsername);
+   console.log(oAttendance);
+   console.log(nAttendance);
+   console.log(oldEventBoolean);
+   console.log(oldEventPoint);
+   console.log(eventBoolean);
+   console.log(newMeetingPoints);
+
     var username = clubUsername;
     var oldAttendance = oAttendance;
     var newAttendance = nAttendance;
     var oldEvent = oldEventBoolean;
     var oldEventPoint = 0;
     var newEvent = eventBoolean;
-    var newMeetingPoints = 1;
+    var newMeetingPoints = 0;
+    var localPointTotal = 0;
 
     const docRef = doc(db, "clubs", username);
 
     const docSnap = await getDoc(docRef);
     console.log("help");
     const pointTotal = docSnap.data().points;
-    console.log(pointTotal);
+    console.log("old total" + pointTotal);
     // const meetingsCollectionRef = collection(docRef, "all-meetings");
     // const databaseItem = doc(meetingsCollectionRef, meetingId);
     // const attendance = doc(databaseItem, "attendance");
     const memberCount = docSnap.data().memberCount;
     var oldAttendancePoint = oldAttendance/memberCount;
     var newAttendancePoint = newAttendance/memberCount;
+    console.log("oldattendance: " + oldAttendance);
+    console.log("newattendance: " + newAttendance);
+    console.log("oldattendancept: " + oldAttendancePoint);
+    console.log("newattendancept: " + newAttendancePoint);
 
     if (oldEvent == true){
       oldEventPoint = 3;
@@ -64,15 +78,25 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
       oldEventPoint = 2;
     }
 
-    await updateDoc(doc(db, "clubs", username), {
-        //resetting points to before prior edit:
-        points: pointTotal - oldAttendancePoint - oldEventPoint,
-      }
-    );
+    console.log("og point total = " + pointTotal);
+
+    localPointTotal = pointTotal - oldAttendance - oldEventPoint;
+
+    console.log("reset point total = " + localPointTotal);
+
+
+    // await updateDoc(doc(db, "clubs", username), {
+    //     //resetting points to before prior edit:
+    //     points: pointTotal - (oldAttendancePoint + oldEventPoint),
+    //   }
+    // );
+    // // var refreshedPoints = pointTotal - (oldAttendancePoint + oldEventPoint);
+    // console.log("is this what we want" + (pointTotal - oldAttendancePoint - oldEventPoint));
 
     //resetting point total:
-    const resetPointTotal = docSnap.data().points;
-
+    // const resetPointTotal = docSnap.data().points;
+    // console.log("refreshed pt total, not inclduing thsi event: " + resetPointTotal);
+    
     //now calculate new points to add:
     if (newEvent == true){
       newMeetingPoints = newMeetingPoints + 3;
@@ -81,11 +105,13 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
       newMeetingPoints = newMeetingPoints + 2;
     }
 
-    const newTotal = resetPointTotal + newMeetingPoints + newAttendancePoint;
+    localPointTotal = localPointTotal + newMeetingPoints + newAttendancePoint;
+
+    console.log("end newTotal = " + localPointTotal);
 
     await updateDoc(doc(db, "clubs", username), {
       //adding newly calculated pt total additions from this meeting
-        points: newTotal,
+        points: localPointTotal,
     });
 
 ////comparing with leaderboards:::
@@ -307,13 +333,13 @@ export const updatePoints = async function(clubUsername, oAttendance, nAttendanc
      var L2Third = document.getElementById("thirdLTwo");
      L2Third.innerHTML = docSnapTwoThird.data().clubName;
 
-     var L2First = document.getElementById("firstLTwo");
+     var L2First = document.getElementById("firstLThree");
      L2First.innerHTML = docSnapThreeFirst.data().clubName;
 
-     var L2First = document.getElementById("firstLTwo");
+     var L2First = document.getElementById("secondLThree");
      L2First.innerHTML = docSnapThreeSecond.data().clubName;
 
-     var L2First = document.getElementById("firstLTwo");
+     var L2First = document.getElementById("thirdLThree");
      L2First.innerHTML = docSnapThreeThird.data().clubName;
 
     }
